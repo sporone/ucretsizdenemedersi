@@ -411,10 +411,11 @@
         font-weight: 800;
       }
 
+      /* Haplar (Pills) Tek Satıra Sabitlendi */
       .card-pills {
         display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        flex-wrap: nowrap; /* Asla alt satıra geçme */
+        gap: 6px;
         margin-bottom: 24px;
         flex-grow: 1;
       }
@@ -422,21 +423,31 @@
       .info-pill {
         display: flex;
         align-items: center;
-        gap: 6px;
+        justify-content: center;
+        gap: 4px;
         background: #ffffff;
         color: #4a5568;
-        padding: 8px 12px;
+        padding: 6px 8px;
         border-radius: 8px;
-        font-size: 0.82rem;
+        font-size: 0.75rem;
         font-weight: 600;
         box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         border: 1px solid #f0f4f2;
+        flex: 1; /* Mevcut alanı eşit paylaş */
+        min-width: 0; /* Taşan metni kesmek için gerekli */
+      }
+
+      .info-pill span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Çok uzunsa "..." ekle */
       }
 
       .info-pill svg {
         width: 14px;
         height: 14px;
         stroke: var(--primary);
+        flex-shrink: 0; /* İkonun ezilmesini engelle */
       }
 
       .whatsapp-button {
@@ -979,20 +990,20 @@
           const isWeekend = school.weekend && school.weekend.trim().toLowerCase() === 'x';
           
           if (isWeekday && isWeekend) {
-            scheduleHtml = `<div class="info-pill">${iconCal} <span>Hafta İçi ve Sonu</span></div>`;
+            scheduleHtml = `<div class="info-pill" title="Hafta İçi ve Sonu">${iconCal} <span>Hafta İçi ve Sonu</span></div>`;
           } else if (isWeekday) {
-            scheduleHtml = `<div class="info-pill">${iconCal} <span>Hafta İçi</span></div>`;
+            scheduleHtml = `<div class="info-pill" title="Hafta İçi">${iconCal} <span>Hafta İçi</span></div>`;
           } else if (isWeekend) {
-            scheduleHtml = `<div class="info-pill">${iconCal} <span>Hafta Sonu</span></div>`;
+            scheduleHtml = `<div class="info-pill" title="Hafta Sonu">${iconCal} <span>Hafta Sonu</span></div>`;
           } else if (school.schedule) {
-            scheduleHtml = `<div class="info-pill">${iconCal} <span>${school.schedule}</span></div>`;
+            scheduleHtml = `<div class="info-pill" title="${school.schedule}">${iconCal} <span>${school.schedule}</span></div>`;
           }
 
           const locationText = [school.city, school.district].filter(Boolean).join(' / ');
 
           let ageHtml = '';
           if (school.age) {
-             ageHtml = `<div class="info-pill">${iconAge} <span>${school.age} Yaş</span></div>`;
+             ageHtml = `<div class="info-pill" title="${school.age} Yaş">${iconAge} <span>${school.age} Yaş</span></div>`;
           }
 
           const card = document.createElement("article");
@@ -1007,7 +1018,7 @@
             </div>
             <h3>${school.name}</h3>
             <div class="card-pills">
-              <div class="info-pill">
+              <div class="info-pill" title="${locationText}">
                 ${iconLoc}
                 <span>${locationText}</span>
               </div>
@@ -1042,78 +1053,89 @@
       }
 
       async function loadSchoolsData() {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
           const sheetId = "1CQvnSukXaT6E_A8zmOobsnOYbKKnSGeSIqqS5sQQOuM";
-          const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
+          // CORS (ProgressEvent) hatalarını önlemek için export yerine gviz endpoint'i kullanılıyor
+          const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
 
-          Papa.parse(csvUrl, {
-            download: true,
-            header: true,
-            skipEmptyLines: true,
-            complete: function(results) {
-              const getVal = (row, possibleKeys) => {
-                const rowKeys = Object.keys(row);
-                for (let key of rowKeys) {
-                  if (possibleKeys.includes(key.trim().toLowerCase())) return row[key];
-                }
-                return '';
-              };
-
-              const parseDate = (dateStr) => {
-                if (!dateStr) return null;
-                const parts = dateStr.trim().split(/[\.\-\/]/);
-                if (parts.length === 3) {
-                  let day = parseInt(parts[0], 10);
-                  let month = parseInt(parts[1], 10) - 1;
-                  let year = parseInt(parts[2], 10);
-                  if (year < 31 && day > 1000) { let t = day; day = year; year = t; }
-                  if (year < 100) year += 2000;
-                  return new Date(year, month, day);
-                }
-                const d = new Date(dateStr);
-                return isNaN(d.getTime()) ? null : d;
-              };
-
-              const today = new Date();
-              today.setHours(0, 0, 0, 0);
-
-              const rawSchools = results.data.map(row => {
-                return {
-                  name: getVal(row, ['okul', 'okul adı', 'okul adi', 'name']) || 'İsimsiz Okul',
-                  sport: getVal(row, ['branş', 'brans', 'sport']),
-                  city: getVal(row, ['il', 'city']),
-                  district: getVal(row, ['ilçe', 'ilce', 'district']),
-                  age: getVal(row, ['yaş grubu', 'yaş', 'yas', 'yaş aralığı', 'age']),
-                  schedule: getVal(row, ['program', 'schedule']),
-                  weekday: getVal(row, ['hafta içi', 'hafta ici']),
-                  weekend: getVal(row, ['hafta sonu']),
-                  pitch: getVal(row, ['tesis', 'pitch']),
-                  phone: getVal(row, ['whatsapp', 'telefon', 'phone']),
-                  highlight: getVal(row, ['açıklama', 'öne çıkan özellik', 'highlight']),
-                  startDateStr: getVal(row, ['başlangıç', 'baslangic', 'başlangıç tarihi']),
-                  endDateStr: getVal(row, ['bitiş', 'bitis', 'bitiş tarihi'])
-                };
-              });
-
-              schools = rawSchools.filter(school => {
-                if (school.startDateStr) {
-                  const sDate = parseDate(school.startDateStr);
-                  if (sDate && sDate > today) return false;
-                }
-                if (school.endDateStr) {
-                  const eDate = parseDate(school.endDateStr);
-                  if (eDate && eDate < today) return false;
-                }
-                return true;
-              });
-
-              resolve();
-            },
-            error: function(err) {
-              console.error("Google Sheets okuma hatası:", err);
-              reject(err);
+          try {
+            const response = await fetch(csvUrl);
+            if (!response.ok) {
+              throw new Error(`Ağ hatası: ${response.status}`);
             }
-          });
+            const csvText = await response.text();
+
+            Papa.parse(csvText, {
+              header: true,
+              skipEmptyLines: true,
+              complete: function(results) {
+                const getVal = (row, possibleKeys) => {
+                  const rowKeys = Object.keys(row);
+                  for (let key of rowKeys) {
+                    if (possibleKeys.includes(key.trim().toLowerCase())) return row[key];
+                  }
+                  return '';
+                };
+
+                const parseDate = (dateStr) => {
+                  if (!dateStr) return null;
+                  const parts = dateStr.trim().split(/[\.\-\/]/);
+                  if (parts.length === 3) {
+                    let day = parseInt(parts[0], 10);
+                    let month = parseInt(parts[1], 10) - 1;
+                    let year = parseInt(parts[2], 10);
+                    if (year < 31 && day > 1000) { let t = day; day = year; year = t; }
+                    if (year < 100) year += 2000;
+                    return new Date(year, month, day);
+                  }
+                  const d = new Date(dateStr);
+                  return isNaN(d.getTime()) ? null : d;
+                };
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                const rawSchools = results.data.map(row => {
+                  return {
+                    name: getVal(row, ['okul', 'okul adı', 'okul adi', 'name']) || 'İsimsiz Okul',
+                    sport: getVal(row, ['branş', 'brans', 'sport']),
+                    city: getVal(row, ['il', 'city']),
+                    district: getVal(row, ['ilçe', 'ilce', 'district']),
+                    age: getVal(row, ['yaş grubu', 'yaş', 'yas', 'yaş aralığı', 'age']),
+                    schedule: getVal(row, ['program', 'schedule']),
+                    weekday: getVal(row, ['hafta içi', 'hafta ici']),
+                    weekend: getVal(row, ['hafta sonu']),
+                    pitch: getVal(row, ['tesis', 'pitch']),
+                    phone: getVal(row, ['whatsapp', 'telefon', 'phone']),
+                    highlight: getVal(row, ['açıklama', 'öne çıkan özellik', 'highlight']),
+                    startDateStr: getVal(row, ['başlangıç', 'baslangic', 'başlangıç tarihi']),
+                    endDateStr: getVal(row, ['bitiş', 'bitis', 'bitiş tarihi'])
+                  };
+                });
+
+                schools = rawSchools.filter(school => {
+                  if (school.startDateStr) {
+                    const sDate = parseDate(school.startDateStr);
+                    if (sDate && sDate > today) return false;
+                  }
+                  if (school.endDateStr) {
+                    const eDate = parseDate(school.endDateStr);
+                    if (eDate && eDate < today) return false;
+                  }
+                  return true;
+                });
+
+                resolve();
+              },
+              error: function(err) {
+                console.error("Google Sheets okuma hatası:", err);
+                reject(err);
+              }
+            });
+          } catch (error) {
+            console.error("Veri çekme hatası (CORS veya tablo gizli):", error);
+            reject(error);
+          }
         });
       }
 
