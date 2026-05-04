@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SporKayıt | Spor Okulu Bul</title>
+    <meta
+      name="description"
+      content="Veliler için spor okulu bulma ve okulların WhatsApp hattından ücretsiz deneme dersi talebi alma platformu."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --surface: #ffffff;
+        --ink: #171b1b;
+        --muted: #66706b;
+        --line: #dde4dc;
+        --primary: #00b5e2; /* Yeni A101 Turkuaz Rengi */
+        --primary-dark: #0093b8; /* Koyu Turkuaz */
+        --red: #d64d3e;
+        --blue: #246bfe;
+        --shadow: 0 22px 60px rgba(23, 27, 27, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px clamp(18px, 5vw, 72px);
+        background: rgba(255, 255, 255, 0.9);
+        border-bottom: 1px solid rgba(221, 228, 220, 0.85);
+        backdrop-filter: blur(16px);
+      }
+
+      .brand,
+      .nav-links,
+      .hero-actions,
+      .funnel-list,
+      .filters,
+      .site-footer {
+        display: flex;
+        align-items: center;
+      }
+
+      .brand {
+        gap: 10px;
+        font-weight: 800;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        color: #fff;
+        background: var(--ink);
+        border-radius: 8px;
+        font-size: 0.82rem;
+      }
+
+      .nav-links {
+        gap: clamp(12px, 3vw, 28px);
+        color: var(--muted);
+        font-size: 0.94rem;
+        font-weight: 700;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.55fr);
+        gap: clamp(28px, 5vw, 72px);
+        padding: clamp(24px, 4vw, 48px) clamp(18px, 5vw, 72px) 48px;
+        align-items: center;
+      }
+
+      .hero-copy {
+        max-width: 880px;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--primary);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 850px;
+        margin-bottom: 22px;
+        font-size: clamp(2.2rem, 4vw, 3.6rem);
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+      }
+
+      .free-highlight {
+        display: inline-block;
+        padding: 0.15em 0.35em;
+        margin: 0.1em 0;
+        color: #fff;
+        background: var(--primary);
+        border-radius: 8px;
+        box-shadow: 0 14px 30px rgba(0, 181, 226, 0.22);
+        white-space: nowrap;
+      }
+
+      h2 {
+        margin-bottom: 12px;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .hero-text {
+        max-width: 720px;
+        color: var(--muted);
+        font-size: clamp(1.04rem, 1.6vw, 1.25rem);
+        line-height: 1.65;
+      }
+
+      .hero-actions {
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        gap: 8px;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .primary {
+        color: #fff;
+        background: var(--primary);
+        box-shadow: 0 14px 30px rgba(0, 181, 226, 0.24);
+      }
+
+      .ghost {
+        background: var(--surface);
+        border-color: var(--line);
+      }
+
+      .score-panel,
+      .pricing-card,
+      .payment-note {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .score-panel {
+        display: grid;
+        gap: 20px;
+        padding: 24px;
+      }
+
+      .panel-topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .panel-topline strong {
+        color: var(--ink);
+        font-size: 2.5rem;
+      }
+
+      .funnel-list {
+        gap: 10px;
+      }
+
+      .funnel-list div {
+        flex: 1;
+        min-height: 96px;
+        padding: 16px;
+        background: #f4f8fa;
+        border-radius: 8px;
+      }
+
+      .funnel-list span,
+      .offer-box span {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 800;
+      }
+
+      .funnel-list strong {
+        font-size: 1.7rem;
+      }
+
+      .offer-box {
+        padding: 20px;
+        color: #fff;
+        background: linear-gradient(135deg, var(--ink), #1e2a33);
+        border-radius: 8px;
+      }
+
+      .offer-box strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1.65rem;
+      }
+
+      .offer-box p {
+        margin-bottom: 0;
+        color: rgba(255, 255, 255, 0.76);
+        line-height: 1.55;
+      }
+
+      .section-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        margin: 0 clamp(18px, 5vw, 72px);
+        overflow: hidden;
+        background: var(--line);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .section-strip article {
+        min-height: 126px;
+        padding: 24px;
+        background: var(--surface);
+      }
+
+      .section-strip strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .section-strip span,
+      .section-heading p,
+      .pricing-card p,
+      .payment-note p {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .schools-section,
+      .register-section {
+        padding: clamp(58px, 8vw, 104px) clamp(18px, 5vw, 72px);
+      }
+
+      .register-section {
+        background: #f2f9fc;
+      }
+
+      .section-heading {
+        max-width: 760px;
+        margin-bottom: 28px;
+      }
+
+      .filters {
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        width: min(240px, 100%);
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 800;
+      }
+
+      select {
+        width: 100%;
+        min-height: 46px;
+        padding: 0 14px;
+        color: var(--ink);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .school-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .school-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 18px;
+        background: linear-gradient(145deg, #ffffff 0%, #eefafc 100%);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 181, 226, 0.05);
+        border: 1px solid #e1f5f8;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .school-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 50px rgba(0, 181, 226, 0.1);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .sport-tag {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--primary-dark);
+        font-weight: 800;
+        font-size: 0.95rem;
+      }
+
+      .sport-icon-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        background: #e1f5f8;
+        border-radius: 12px;
+        font-size: 1.25rem;
+      }
+
+      .school-card h3 {
+        margin-top: 0;
+        margin-bottom: 18px;
+        font-size: 1.15rem;
+        color: #121c26;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+      }
+
+      .card-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 24px;
+        flex-grow: 1;
+      }
+
+      .info-pill {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: #ffffff;
+        color: #4a5568;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        border: 1px solid #f0f4f2;
+      }
+
+      .info-pill svg {
+        width: 14px;
+        height: 14px;
+        stroke: var(--primary);
+      }
+
+      .whatsapp-button {
+        position: relative;
+        display: flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        color: #fff;
+        background: var(--primary);
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-align: center;
+        transition: background 0.2s ease, transform 0.2s ease;
+        text-decoration: none;
+      }
+      
+      .whatsapp-button:hover {
+        background: var(--primary-dark);
+      }
+
+      .whatsapp-button svg {
+        position: absolute;
+        right: 14px;
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .empty-state {
+        grid-column: 1 / -1;
+        padding: 22px;
+        color: var(--muted);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .pricing-card {
+        display: flex;
+        min-height: 320px;
+        flex-direction: column;
+        padding: 24px;
+      }
+
+      .pricing-card.featured {
+        color: #fff;
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        border-color: transparent;
+      }
+
+      .coffee-count {
+        display: inline-flex;
+        width: fit-content;
+        min-height: 36px;
+        align-items: center;
+        padding: 0 12px;
+        color: var(--primary-dark);
+        background: #e1f5f8;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      .featured .coffee-count {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .pricing-card h3 {
+        margin: 18px 0 10px;
+        font-size: clamp(1.7rem, 3vw, 2.45rem);
+        line-height: 1;
+      }
+
+      .pricing-card p {
+        margin-bottom: 22px;
+      }
+
+      .pricing-perks {
+        display: grid;
+        gap: 10px;
+        margin: 0 0 24px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pricing-perks li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .pricing-perks li::before {
+        position: absolute;
+        top: 0.58em;
+        left: 0;
+        width: 7px;
+        height: 7px;
+        background: var(--primary);
+        border-radius: 999px;
+        content: "";
+      }
+
+      .featured p {
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .featured .pricing-perks li {
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .featured .pricing-perks li::before {
+        background: #fff;
+      }
+
+      .pricing-card .button {
+        width: 100%;
+        margin-top: auto;
+      }
+
+      .payment-note {
+        display: grid;
+        gap: 6px;
+        margin-top: 16px;
+        padding: 18px 20px;
+        box-shadow: none;
+      }
+
+      .payment-note strong {
+        display: block;
+        font-size: 1rem;
+      }
+
+      .payment-note p {
+        margin-bottom: 0;
+      }
+
+      .site-footer {
+        justify-content: space-between;
+        gap: 16px;
+        padding: 28px clamp(18px, 5vw, 72px);
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      .site-footer a {
+        color: var(--primary-dark);
+        font-weight: 800;
+      }
+
+      @media (max-width: 1200px) {
+        .school-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 1120px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 960px) {
+        .school-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 720px) {
+        .site-header {
+          position: static;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        h1 {
+          font-size: clamp(2.45rem, 12vw, 4rem);
+        }
+
+        .section-strip,
+        .school-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .funnel-list {
+          flex-direction: column;
+        }
+
+        label {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>Çocuğunuz için en yakın spor okulundan <span class="free-highlight">ÜCRETSİZ</span> deneme dersi alın.</h1>
+          <p class="hero-text">
+            Futbol, basketbol, voleybol, yüzme ve cimnastik okullarını tek
+            sayfada karşılaştırın. Beğendiğiniz okulun WhatsApp hattına hazır
+            deneme dersi mesajı gönderin.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#okullar">Okulları gör</a>
+            <a class="button ghost" href="#kayit">Okulunuzu ekleyin</a>
+          </div>
+        </div>
+
+        <aside class="score-panel" aria-label="Platform özeti">
+          <div class="panel-topline">
+            <span>Listelenen okul</span>
+            <strong id="school-count">0</strong>
+          </div>
+          <div class="funnel-list">
+            <div>
+              <span>Branş</span>
+              <strong id="sport-count">0</strong>
+            </div>
+            <div>
+              <span>İlçe</span>
+              <strong id="district-count">0</strong>
+            </div>
+            <div>
+              <span>WhatsApp</span>
+              <strong id="whatsapp-count">0 tik</strong>
+            </div>
+          </div>
+          <div class="offer-box">
+            <span>Okul kaydı</span>
+            <strong>1 kahve = 2 ay</strong>
+            <p>Kayıt paketini seçin, okulunuzu listeye ekleyelim.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section-strip" aria-label="Platform özellikleri">
+        <article>
+          <strong>Branşa göre arama</strong>
+          <span>Futbol, basketbol, voleybol, yüzme ve cimnastik okullarını filtreleyin.</span>
+        </article>
+        <article>
+          <strong>İlçeye göre seçim</strong>
+          <span>Size yakın spor okulunu hızlı şekilde bulun.</span>
+        </article>
+        <article>
+          <strong>WhatsApp ile iletişim</strong>
+          <span>Deneme dersi talebinizi seçilen okulun kendi hattına gönderin.</span>
+        </article>
+      </section>
+
+      <section class="schools-section" id="okullar">
+        <div class="section-heading">
+          <p class="eyebrow">Spor okulları</p>
+          <h2>Ücretsiz deneme dersi alabileceğiniz okullar</h2>
+          <p>
+            Filtreleri kullanarak size uygun okulu bulun. Deneme dersi butonu,
+            o okulun kendi WhatsApp numarasına mesaj gönderir.
+          </p>
+        </div>
+
+        <div class="filters" aria-label="Okul filtreleri">
+          <label>
+            Branş
+            <select id="sport-filter">
+              <option value="">Tüm branşlar</option>
+            </select>
+          </label>
+          <label>
+            İl
+            <select id="city-filter">
+              <option value="">Tüm iller</option>
+            </select>
+          </label>
+          <label>
+            İlçe
+            <select id="district-filter" disabled>
+              <option value="">Önce il seçin</option>
+            </select>
+          </label>
+          <label>
+            Yaş
+            <select id="age-filter">
+              <option value="">Tüm yaşlar</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="school-grid" id="school-list" aria-live="polite"></div>
+      </section>
+
+      <section class="register-section" id="kayit">
+        <div class="section-heading">
+          <p class="eyebrow">Spor okulları için</p>
+          <h2>Okulunuzu SporKayıt listesine ekleyin.</h2>
+          <p>
+            Okul kartınızda branşınız, ilçeniz, yaş aralığınız, tesis
+            bilginiz ve WhatsApp deneme dersi butonunuz yer alır.
+          </p>
+        </div>
+        <div class="pricing-grid" aria-label="Okul kayıt paketleri">
+          <article class="pricing-card">
+            <span class="coffee-count">1 kahve</span>
+            <h3>2 ay kullanım</h3>
+            <p>1 ay kayıt + 1 ay hediye. Yeni başlayan okullar için hızlı deneme paketi.</p>
+            <ul class="pricing-perks">
+              <li>Okul kartı yayına alınır</li>
+              <li>WhatsApp deneme dersi butonu eklenir</li>
+              <li>Branş ve ilçe filtrelerinde görünür</li>
+            </ul>
+            <a
+              class="button ghost"
+              href="https://buymeacoffee.com/bedenegitimi"
+              data-payment-link
+              target="_blank"
+              rel="noopener"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+              1 kahve ile kayıt ol
+            </a>
+          </article>
+
+          <article class="pricing-card">
+            <span class="coffee-count">3 kahve</span>
+            <h3>6 ay kullanım</h3>
+            <p>3 ay kayıt + 3 ay hediye. Yeni dönem, ara tatil ve kayıt yoğunluğu için güçlü paket.</p>
+            <ul class="pricing-perks">
+              <li>Okul kartı yayında kalır</li>
+              <li>Liste içinde öne çıkan bilgi alanı</li>
+              <li>Program ve tesis bilgileri güncellenebilir</li>
+            </ul>
+            <a
+              class="button ghost"
+              href="https://buymeacoffee.com/bedenegitimi"
+              data-payment-link
+              target="_blank"
+              rel="noopener"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+              3 kahve ile kayıt ol
+            </a>
+          </article>
+
+          <article class="pricing-card featured">
+            <span class="coffee-count">5 kahve</span>
+            <h3>10 ay kullanım</h3>
+            <p>5 ay kayıt + 5 ay hediye. Eylül ayından haziran sonuna kadar tüm sezonu kapsar.</p>
+            <ul class="pricing-perks">
+              <li>Tüm sezon kesintisiz görünürlük</li>
+              <li>Sezon paketi olarak öne çıkarılır</li>
+              <li>Kayıt dönemlerinde bilgi güncelleme desteği</li>
+            </ul>
+            <a
+              class="button primary"
+              href="https://buymeacoffee.com/bedenegitimi"
+              data-payment-link
+              target="_blank"
+              rel="noopener"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+              5 kahve ile sezonu al
+            </a>
+          </article>
+        </div>
+
+        <div class="payment-note">
+          <strong>Ödeme sayfasında</strong>
+          <p>Buy Me a Coffee sayfasında almak istediğiniz paket kadar kahve adedini seçin: 1, 3 veya 5.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>SporKayıt spor okulu bulma platformu</span>
+      <a href="#kayit">Okul kaydı</a>
+    </footer>
+
+    <script>
+      // ----------------------------------------------------
+      // GOOGLE APPS SCRIPT WEB APP URL'si
+      // (Aşağıdaki 2. adımdaki URL'yi buraya yapıştırın)
+      // ----------------------------------------------------
+      const googleScriptURL = "https://script.google.com/macros/s/AKfycbytThQGVOohZZffQnOGTFbYAJrLNBUaHs8cTscwLJalmqTBMDQzwU6ErD7pvfcZHCM/exec"; 
+
+      // Google Sheets Verilerini Tutacak Dizi
+      let schools = [];
+
+      // DOM Elementleri
+      const schoolList = document.getElementById("school-list");
+      const sportFilter = document.getElementById("sport-filter");
+      const cityFilter = document.getElementById("city-filter");
+      const districtFilter = document.getElementById("district-filter");
+      const ageFilter = document.getElementById("age-filter");
+
+      // İstatistik Elementleri
+      const countSchool = document.getElementById("school-count");
+      const countSport = document.getElementById("sport-count");
+      const countDistrict = document.getElementById("district-count");
+      const countWhatsapp = document.getElementById("whatsapp-count");
+
+      // SVG İkonları
+      const iconLoc = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`;
+      const iconAge = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`;
+      const iconCal = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`;
+
+      // Benzersiz değerleri almak için yardımcı fonksiyon
+      function getUniqueValues(data, key) {
+        return [...new Set(data.map(item => item[key]).filter(val => val))].sort();
+      }
+
+      // Filtreleri Doldur
+      function populateFilters() {
+        sportFilter.innerHTML = '<option value="">Tüm branşlar</option>';
+        ageFilter.innerHTML = '<option value="">Tüm yaşlar</option>';
+
+        const sports = getUniqueValues(schools, 'sport');
+        const ages = getUniqueValues(schools, 'age');
+
+        sports.forEach(sport => {
+          sportFilter.add(new Option(sport, sport));
+        });
+
+        ages.forEach(age => {
+          ageFilter.add(new Option(age, age));
+        });
+      }
+
+      let nationalData = [];
+
+      // Türkiye Ulusal API'sinden İl ve İlçe Verilerini Yükle
+      async function loadNationalData() {
+        try {
+          const response = await fetch("https://turkiyeapi.dev/api/v1/provinces");
+          const result = await response.json();
+          nationalData = result.data;
+          
+          nationalData.sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(province => {
+            cityFilter.add(new Option(province.name, province.name));
+          });
+        } catch (error) {
+          console.error("Ulusal veri çekilemedi. Okulların kayıtlı olduğu iller listeleniyor.", error);
+          const cities = getUniqueValues(schools, 'city');
+          cities.forEach(city => {
+            cityFilter.add(new Option(city, city));
+          });
+        }
+      }
+
+      // İl değiştiğinde İlçeleri doldur
+      function handleCityChange() {
+        const selectedCity = cityFilter.value;
+        districtFilter.innerHTML = "";
+        
+        if (!selectedCity) {
+          districtFilter.disabled = true;
+          districtFilter.add(new Option("Önce il seçin", ""));
+        } else {
+          districtFilter.disabled = false;
+          districtFilter.add(new Option("Tüm ilçeler", ""));
+          
+          const province = nationalData.find(p => p.name === selectedCity);
+          if (province && province.districts) {
+             province.districts.sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(d => {
+               districtFilter.add(new Option(d.name, d.name));
+             });
+          } else {
+             const districts = [...new Set(schools.filter(s => s.city === selectedCity).map(s => s.district))].sort((a,b) => a.localeCompare(b, 'tr'));
+             districts.forEach(d => {
+               districtFilter.add(new Option(d, d));
+             });
+          }
+        }
+        
+        filterSchools();
+      }
+
+      // İstatistikleri Güncelle
+      function updateStats(data) {
+        countSchool.textContent = data.length;
+        countSport.textContent = getUniqueValues(data, 'sport').length;
+        countDistrict.textContent = getUniqueValues(data, 'district').length;
+      }
+
+      // Okulları Ekrana Yazdır
+      function renderSchools(data) {
+        schoolList.innerHTML = "";
+
+        if (data.length === 0) {
+          schoolList.innerHTML = `<div class="empty-state">Seçtiğiniz filtrelere uygun okul bulunamadı. Lütfen aramayı genişletin.</div>`;
+          return;
+        }
+
+        data.forEach(school => {
+          let cleanPhone = String(school.phone || '').replace(/[^0-9]/g, '');
+          if (cleanPhone.length === 10 && !cleanPhone.startsWith('90')) cleanPhone = '90' + cleanPhone;
+          else if (cleanPhone.length === 11 && cleanPhone.startsWith('0')) cleanPhone = '90' + cleanPhone.substring(1);
+
+          const message = encodeURIComponent(`Merhaba, SporKayıt platformundan ulaşıyorum. ${school.name} için ücretsiz deneme dersi almak istiyorum. Bilgi alabilir miyim?`);
+          const whatsappUrl = `https://wa.me/${cleanPhone}?text=${message}`;
+
+          let sportIcon = '🏅';
+          const s = (school.sport || '').toLowerCase();
+          if (s.includes('basketbol')) sportIcon = '🏀';
+          else if (s.includes('futbol')) sportIcon = '⚽';
+          else if (s.includes('voleybol')) sportIcon = '🏐';
+          else if (s.includes('yüzme') || s.includes('yuzme')) sportIcon = '🏊‍♂️';
+          else if (s.includes('cimnastik') || s.includes('jimnastik')) sportIcon = '🤸‍♀️';
+          else if (s.includes('tenis')) sportIcon = '🎾';
+
+          let scheduleHtml = '';
+          const isWeekday = school.weekday && school.weekday.trim().toLowerCase() === 'x';
+          const isWeekend = school.weekend && school.weekend.trim().toLowerCase() === 'x';
+          
+          if (isWeekday && isWeekend) {
+            scheduleHtml = `<div class="info-pill">${iconCal} <span>Hafta İçi ve Sonu</span></div>`;
+          } else if (isWeekday) {
+            scheduleHtml = `<div class="info-pill">${iconCal} <span>Hafta İçi</span></div>`;
+          } else if (isWeekend) {
+            scheduleHtml = `<div class="info-pill">${iconCal} <span>Hafta Sonu</span></div>`;
+          } else if (school.schedule) {
+            scheduleHtml = `<div class="info-pill">${iconCal} <span>${school.schedule}</span></div>`;
+          }
+
+          const locationText = [school.city, school.district].filter(Boolean).join(' / ');
+
+          let ageHtml = '';
+          if (school.age) {
+             ageHtml = `<div class="info-pill">${iconAge} <span>${school.age} Yaş</span></div>`;
+          }
+
+          const card = document.createElement("article");
+          card.className = "school-card";
+          
+          card.innerHTML = `
+            <div class="card-header">
+              <div class="sport-tag">
+                <div class="sport-icon-box">${sportIcon}</div>
+                <span class="sport-name">${school.sport}</span>
+              </div>
+            </div>
+            <h3>${school.name}</h3>
+            <div class="card-pills">
+              <div class="info-pill">
+                ${iconLoc}
+                <span>${locationText}</span>
+              </div>
+              ${ageHtml}
+              ${scheduleHtml}
+            </div>
+            <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="whatsapp-button">
+              Ücretsiz Deneme Dersi Al
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          `;
+          schoolList.appendChild(card);
+        });
+      }
+
+      function filterSchools() {
+        const selectedSport = sportFilter.value;
+        const selectedCity = cityFilter.value;
+        const selectedDistrict = districtFilter.value;
+        const selectedAge = ageFilter.value;
+
+        const filtered = schools.filter(school => {
+          const matchSport = selectedSport === "" || school.sport === selectedSport;
+          const matchCity = selectedCity === "" || school.city === selectedCity;
+          const matchDistrict = selectedDistrict === "" || school.district === selectedDistrict;
+          const matchAge = selectedAge === "" || school.age === selectedAge;
+          
+          return matchSport && matchCity && matchDistrict && matchAge;
+        });
+
+        renderSchools(filtered);
+      }
+
+      async function loadSchoolsData() {
+        return new Promise((resolve, reject) => {
+          const sheetId = "1CQvnSukXaT6E_A8zmOobsnOYbKKnSGeSIqqS5sQQOuM";
+          const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv`;
+
+          Papa.parse(csvUrl, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+              const getVal = (row, possibleKeys) => {
+                const rowKeys = Object.keys(row);
+                for (let key of rowKeys) {
+                  if (possibleKeys.includes(key.trim().toLowerCase())) return row[key];
+                }
+                return '';
+              };
+
+              const parseDate = (dateStr) => {
+                if (!dateStr) return null;
+                const parts = dateStr.trim().split(/[\.\-\/]/);
+                if (parts.length === 3) {
+                  let day = parseInt(parts[0], 10);
+                  let month = parseInt(parts[1], 10) - 1;
+                  let year = parseInt(parts[2], 10);
+                  if (year < 31 && day > 1000) { let t = day; day = year; year = t; }
+                  if (year < 100) year += 2000;
+                  return new Date(year, month, day);
+                }
+                const d = new Date(dateStr);
+                return isNaN(d.getTime()) ? null : d;
+              };
+
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+
+              const rawSchools = results.data.map(row => {
+                return {
+                  name: getVal(row, ['okul', 'okul adı', 'okul adi', 'name']) || 'İsimsiz Okul',
+                  sport: getVal(row, ['branş', 'brans', 'sport']),
+                  city: getVal(row, ['il', 'city']),
+                  district: getVal(row, ['ilçe', 'ilce', 'district']),
+                  age: getVal(row, ['yaş grubu', 'yaş', 'yas', 'yaş aralığı', 'age']),
+                  schedule: getVal(row, ['program', 'schedule']),
+                  weekday: getVal(row, ['hafta içi', 'hafta ici']),
+                  weekend: getVal(row, ['hafta sonu']),
+                  pitch: getVal(row, ['tesis', 'pitch']),
+                  phone: getVal(row, ['whatsapp', 'telefon', 'phone']),
+                  highlight: getVal(row, ['açıklama', 'öne çıkan özellik', 'highlight']),
+                  startDateStr: getVal(row, ['başlangıç', 'baslangic', 'başlangıç tarihi']),
+                  endDateStr: getVal(row, ['bitiş', 'bitis', 'bitiş tarihi'])
+                };
+              });
+
+              schools = rawSchools.filter(school => {
+                if (school.startDateStr) {
+                  const sDate = parseDate(school.startDateStr);
+                  if (sDate && sDate > today) return false;
+                }
+                if (school.endDateStr) {
+                  const eDate = parseDate(school.endDateStr);
+                  if (eDate && eDate < today) return false;
+                }
+                return true;
+              });
+
+              resolve();
+            },
+            error: function(err) {
+              console.error("Google Sheets okuma hatası:", err);
+              reject(err);
+            }
+          });
+        });
+      }
+
+      // WhatsApp Tıklama - Google Sheets veya Yerel Hafıza
+      async function fetchTotalClicks() {
+        if (!googleScriptURL) {
+           let local = parseInt(localStorage.getItem('waClicks')) || 0;
+           countWhatsapp.textContent = local + ' tik';
+           return;
+        }
+        try {
+           const response = await fetch(googleScriptURL);
+           const data = await response.json();
+           countWhatsapp.textContent = data.clicks + ' tik';
+        } catch(e) {
+           console.log("Sunucudan sayaç çekilemedi, yerel veri gösteriliyor.");
+           let local = parseInt(localStorage.getItem('waClicks')) || 0;
+           countWhatsapp.textContent = local + ' tik';
+        }
+      }
+
+      schoolList.addEventListener('click', (e) => {
+        const btn = e.target.closest('.whatsapp-button');
+        if (btn) {
+           let current = parseInt(countWhatsapp.textContent) || parseInt(localStorage.getItem('waClicks')) || 0;
+           current++;
+           countWhatsapp.textContent = current + ' tik';
+           localStorage.setItem('waClicks', current); // Her ihtimale karşı tarayıcıda tut
+
+           if (googleScriptURL) {
+               // Excel tablosundaki sayacı artırması için arkada sessizce sinyal gönderir
+               fetch(googleScriptURL + "?action=click", { method: 'GET', mode: 'no-cors' }).catch(err => {});
+           }
+        }
+      });
+
+      sportFilter.addEventListener("change", filterSchools);
+      cityFilter.addEventListener("change", handleCityChange);
+      districtFilter.addEventListener("change", filterSchools);
+      ageFilter.addEventListener("change", filterSchools);
+
+      // Başlangıç Fonksiyonları
+      async function init() {
+        schoolList.innerHTML = `<div class="empty-state">Okullar yükleniyor... Lütfen bekleyin.</div>`;
+        try {
+          await loadSchoolsData();
+          await loadNationalData();
+          populateFilters();
+          updateStats(schools);
+          renderSchools(schools);
+          await fetchTotalClicks();
+        } catch (error) {
+          schoolList.innerHTML = `<div class="empty-state">Veriler yüklenemedi. Lütfen Google E-Tablo paylaşım ayarlarını kontrol edin.</div>`;
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", init);
+    </script>
+  </body>
+</html>
