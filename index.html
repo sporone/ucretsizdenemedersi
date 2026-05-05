@@ -672,8 +672,25 @@
           grid-template-columns: 1fr;
         }
 
+        /* YENİ: Mobil görünümde istatistikleri yan yana zorla ve sığdır */
         .funnel-list {
-          flex-direction: column;
+          flex-direction: row;
+          gap: 6px;
+        }
+
+        .funnel-list div {
+          padding: 12px 8px;
+          min-height: auto;
+          text-align: center;
+        }
+
+        .funnel-list span {
+          font-size: 0.75rem;
+          margin-bottom: 4px;
+        }
+
+        .funnel-list strong {
+          font-size: 1.25rem;
         }
 
         label {
