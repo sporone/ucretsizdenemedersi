@@ -17,11 +17,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
       :root {
-        --bg: #f0f4f8; 
+        --bg: #f8fafc; 
         --surface: #ffffff;
         --ink: #171b1b;
-        --muted: #66706b;
-        --line: #dde4dc;
+        --muted: #64748b;
+        --line: #e2e8f0;
         --primary: #00b5e2;
         --primary-dark: #0093b8;
         --red: #d64d3e;
@@ -65,32 +65,27 @@
         font: inherit;
       }
 
+      /* YENİ HEADER TASARIMI (Daha şeffaf ve entegre) */
       .site-header {
-        position: sticky;
+        position: absolute;
         top: 0;
-        z-index: 10;
+        left: 0;
+        right: 0;
+        z-index: 20;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 24px;
-        padding: 18px clamp(18px, 5vw, 72px);
-        background: rgba(255, 255, 255, 0.9);
-        border-bottom: 1px solid rgba(221, 228, 220, 0.85);
-        backdrop-filter: blur(16px);
-      }
-
-      .brand,
-      .nav-links,
-      .hero-actions,
-      .funnel-list,
-      .site-footer {
-        display: flex;
-        align-items: center;
+        padding: 24px clamp(18px, 5vw, 72px);
+        background: transparent;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .brand {
         gap: 10px;
         font-weight: 800;
+        color: #ffffff;
+        font-size: 1.2rem;
       }
 
       .brand-mark {
@@ -98,84 +93,273 @@
         width: 38px;
         height: 38px;
         place-items: center;
-        color: #fff;
-        background: var(--ink);
+        color: var(--ink);
+        background: #ffffff;
         border-radius: 8px;
         font-size: 0.82rem;
       }
 
       .nav-links {
-        gap: clamp(12px, 3vw, 28px);
-        color: var(--muted);
-        font-size: 0.94rem;
-        font-weight: 700;
-      }
-
-      .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.55fr);
-        gap: clamp(28px, 5vw, 72px);
-        padding: clamp(24px, 4vw, 48px) clamp(18px, 5vw, 72px) 48px;
+        display: flex;
         align-items: center;
+        gap: clamp(12px, 3vw, 28px);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.94rem;
+        font-weight: 600;
       }
 
-      .hero-copy {
-        max-width: 880px;
+      .header-actions .button {
+        background: #ffffff;
+        color: #0f172a;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        box-shadow: none;
       }
 
-      .eyebrow {
-        margin: 0 0 14px;
-        color: var(--primary);
-        font-size: 0.78rem;
-        font-weight: 800;
-        letter-spacing: 0;
-        text-transform: uppercase;
+      /* YENİ EKLENEN MODERN HERO ALANI */
+      .hero-bg-section {
+        position: relative;
+        /* Fitness salonu yerine daha uygun, premium bir kapalı basketbol/voleybol salonu görseli eklendi */
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+        min-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 120px clamp(18px, 5vw, 72px) 160px; /* Alttan kart için boşluk bırakıldı */
+        color: #ffffff;
       }
 
-      h1,
-      h2,
-      h3,
-      p {
-        margin-top: 0;
+      .hero-content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        animation: fadeIn 0.8s ease-out;
       }
 
-      h1 {
-        max-width: 850px;
-        margin-bottom: 22px;
-        font-size: clamp(2.2rem, 4vw, 3.6rem);
-        line-height: 1.25;
-        letter-spacing: -0.02em;
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
-      .free-highlight {
-        display: inline-block;
-        padding: 0.15em 0.35em;
-        margin: 0.1em 0;
-        color: #fff;
-        background: var(--primary);
-        border-radius: 8px;
-        box-shadow: 0 14px 30px rgba(0, 181, 226, 0.22);
-        white-space: nowrap;
-      }
-
-      h2 {
-        margin-bottom: 12px;
-        font-size: clamp(2rem, 4vw, 3.5rem);
-        line-height: 1;
-        letter-spacing: 0;
-      }
-
-      .hero-text {
-        max-width: 720px;
-        color: var(--muted);
-        font-size: clamp(1.04rem, 1.6vw, 1.25rem);
-        line-height: 1.65;
-      }
-
-      .hero-actions {
-        flex-wrap: wrap;
+      .hero-tags {
+        display: flex;
         gap: 12px;
-        margin-top: 30px;
+        margin-bottom: 24px;
+      }
+
+      .hero-tag {
+        background: #ffffff;
+        color: #0f172a;
+        padding: 8px 20px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+
+      .hero-bg-section h1 {
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        max-width: 900px;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin-bottom: 24px;
+        font-weight: 800;
+      }
+
+      .hero-bg-section p {
+        font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+        max-width: 600px;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.6;
+        font-weight: 400;
+      }
+
+      /* HERO ÜZERİNE BİNEN FİLTRE KARTI (Görseldeki gibi) */
+      .hero-filter-wrapper {
+        position: relative;
+        max-width: 1200px;
+        width: calc(100% - clamp(36px, 10vw, 144px));
+        margin: -100px auto 40px; /* Yukarı doğru taşıyarak resmin üzerine bindirir */
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 24px 32px;
+        box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+      }
+
+      .hero-filter-wrapper h3 {
+        font-size: 1.6rem;
+        color: #0f172a;
+        margin-bottom: 16px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .filter-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr) auto;
+        gap: 16px;
+        align-items: end;
+      }
+
+      .filter-col {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .filter-col label {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      .filter-col select {
+        background: #f4f4f5;
+        border: none;
+        min-height: 56px;
+        border-radius: 12px;
+        padding: 0 16px;
+        font-size: 1rem;
+        color: #3f3f46;
+        font-weight: 500;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%233f3f46%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 16px top 50%;
+        background-size: 12px auto;
+        transition: all 0.2s ease;
+      }
+
+      .filter-col select:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 181, 226, 0.2);
+        background-color: #ffffff;
+      }
+
+      .search-action-btn {
+        background: #0f172a;
+        color: #ffffff;
+        min-height: 56px;
+        padding: 0 32px;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
+      }
+
+      .search-action-btn:hover {
+        background: #1e293b;
+        transform: translateY(-2px);
+        box-shadow: 0 14px 24px rgba(15, 23, 42, 0.25);
+      }
+
+      /* Popüler Aramalar Şeridi */
+      .quick-filters {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid #f1f5f9;
+        flex-wrap: wrap;
+      }
+
+      .quick-label {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      .quick-tag {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #64748b;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .quick-tag:hover {
+        background: #f8fafc;
+        border-color: #cbd5e1;
+        color: #0f172a;
+      }
+
+      /* İSTATİSTİK ŞERİDİ (Eski sağ paneli yatay yaptık) */
+      .stats-horizontal-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        max-width: 1200px;
+        width: calc(100% - clamp(36px, 10vw, 144px));
+        margin: 0 auto 60px;
+      }
+
+      .stat-card {
+        display: flex;
+        flex-direction: row; /* Dikeyden yataya çevirdik */
+        align-items: center; /* İkon ve metni ortaladık */
+        padding: 16px 20px; /* İç boşluğu küçülttük */
+        gap: 16px; /* İkon ve metin arası boşluk */
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px; /* Daha minik kenar yuvarlaklığı */
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.08);
+      }
+
+      .stat-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        margin-bottom: 0; /* Alt boşluğu iptal ettik */
+        flex-shrink: 0;
+        color: var(--primary);
+        background: #f0f9ff;
+        border-radius: 12px;
+      }
+
+      .stat-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 2.5;
+      }
+
+      .stat-details {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .stat-details span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 0; /* Alt boşluğu iptal ettik */
+      }
+
+      .stat-details strong {
+        display: block;
+        color: #0f172a;
+        font-size: 1.3rem; /* Sayı boyutunu çok daha minimal yaptık */
+        line-height: 1;
+        letter-spacing: -0.02em;
       }
 
       .button {
@@ -207,147 +391,74 @@
         border-color: var(--line);
       }
 
-      .score-panel,
-      .pricing-card,
-      .payment-note {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        box-shadow: var(--shadow);
-      }
-
-      .score-panel {
-        display: grid;
-        gap: 20px;
-        padding: 24px;
-      }
-
-      .panel-topline {
-        display: flex;
-        justify-content: space-between;
-        gap: 16px;
-        color: var(--muted);
-        font-weight: 700;
-      }
-
-      .panel-topline strong {
-        color: var(--ink);
-        font-size: 2.5rem;
-      }
-
-      .funnel-list {
-        gap: 10px;
-      }
-
-      .funnel-list div {
-        flex: 1;
-        min-height: 96px;
-        padding: 16px;
-        background: #f4f8fa;
-        border-radius: 8px;
-      }
-
-      .funnel-list span,
-      .offer-box span {
-        display: block;
-        margin-bottom: 8px;
-        color: var(--muted);
-        font-size: 0.8rem;
-        font-weight: 800;
-      }
-
-      .funnel-list strong {
-        font-size: 1.7rem;
-      }
-
-      .offer-box {
-        padding: 20px;
-        color: #fff;
-        background: linear-gradient(135deg, var(--ink), #1e2a33);
-        border-radius: 8px;
-      }
-
-      .offer-box strong {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 1.65rem;
-      }
-
-      .offer-box p {
-        margin-bottom: 0;
-        color: rgba(255, 255, 255, 0.76);
-        line-height: 1.55;
-      }
-
       .section-strip {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1px;
-        margin: 0 clamp(18px, 5vw, 72px);
+        margin: 0 clamp(18px, 5vw, 72px) 24px;
         overflow: hidden;
         background: var(--line);
         border: 1px solid var(--line);
-        border-radius: 8px;
+        border-radius: 20px; /* Tasarımı yumuşatmak için radius artırıldı */
       }
 
       .section-strip article {
         min-height: 126px;
-        padding: 24px;
+        padding: 32px 24px;
         background: var(--surface);
       }
 
       .section-strip strong {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
+        font-size: 1.1rem;
+        color: #0f172a;
       }
 
       .section-strip span,
       .section-heading p,
-      .pricing-card p,
       .payment-note p {
         color: var(--muted);
         line-height: 1.6;
       }
 
-      .schools-section,
-      .register-section {
-        padding: clamp(58px, 8vw, 104px) clamp(18px, 5vw, 72px);
+      /* YENİ: Alt boşluk (padding-bottom) daraltıldı */
+      .recent-schools-section {
+        padding: 24px clamp(18px, 5vw, 72px) 40px; 
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border-bottom: 1px solid var(--line);
+      }
+
+      /* YENİ: Üst ve alt boşluklar daha makul seviyeye çekildi */
+      .schools-section {
+        padding: 48px clamp(18px, 5vw, 72px) 48px;
       }
 
       .register-section {
-        background: #f2f9fc;
+        padding: 48px clamp(18px, 5vw, 72px) 80px;
+        background: #f8fafc;
       }
 
       .section-heading {
         max-width: 760px;
-        margin-bottom: 28px;
+        margin-bottom: 32px;
       }
 
-      /* YENİ: Filtre alanını 4 kolonlu Grid yapıya geçirdik */
-      .filters {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 20px; /* Kartlardaki 20px boşlukla aynı */
-        margin-bottom: 24px;
-      }
-
-      label {
-        display: grid;
-        gap: 8px;
-        width: 100%; /* Sınırı kaldırıp sütuna tam yayılmasını sağladık */
-        color: var(--muted);
-        font-size: 0.88rem;
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--primary);
+        font-size: 0.78rem;
         font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
 
-      select {
-        width: 100%;
-        min-height: 46px;
-        padding: 0 14px;
-        color: var(--ink);
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 8px;
+      .section-heading h2 {
+        margin-bottom: 16px;
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: #0f172a;
       }
 
       .school-grid {
@@ -360,140 +471,215 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        padding: 20px 18px;
-        background: linear-gradient(145deg, #ffffff 0%, #eefafc 100%);
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0, 181, 226, 0.05);
-        border: 1px solid #e1f5f8;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        padding: 16px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(226, 232, 240, 0.8);
+        border: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         overflow: hidden;
         z-index: 1;
       }
 
       .school-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 50px rgba(0, 181, 226, 0.1);
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px -8px rgba(0, 181, 226, 0.12), 0 0 0 1px rgba(0, 181, 226, 0.2);
+      }
+
+      /* YENİ EKLENEN: Sayfalama (Pagination) Stilleri */
+      .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 40px;
+        width: 100%;
+      }
+
+      .page-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        height: 44px;
+        padding: 0 12px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .page-btn svg {
+        display: block;
+      }
+
+      .page-btn:hover:not(:disabled) {
+        border-color: var(--primary);
+        color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 181, 226, 0.1);
+      }
+
+      .page-btn.active {
+        background: var(--primary);
+        color: #ffffff;
+        border-color: var(--primary);
+        box-shadow: 0 4px 12px rgba(0, 181, 226, 0.25);
+      }
+
+      .page-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
       }
 
       .card-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
       }
 
       .sport-tag {
         display: flex;
         align-items: center;
-        gap: 10px;
-        color: var(--primary-dark);
+        gap: 8px;
+        /* YENİ: Renkler JS'den dinamik geleceği için buradaki sabit renk kaldırıldı */
         font-weight: 800;
-        font-size: 0.95rem;
+        font-size: 0.85rem;
+        letter-spacing: -0.01em;
       }
 
       .sport-icon-box {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 38px;
-        height: 38px;
-        background: #e1f5f8;
-        border-radius: 12px;
-        color: var(--primary-dark);
+        width: 32px;
+        height: 32px;
+        /* YENİ: Arka plan rengi JS'den geleceği için buradaki sabit renk kaldırıldı */
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Gölge daha nötr hale getirildi */
       }
 
       .sport-icon-box svg {
-        width: 22px;
-        height: 22px;
+        width: 16px;
+        height: 16px;
         stroke: currentColor;
+        stroke-width: 2.5;
       }
 
       .school-logo {
-        max-height: 40px;
-        max-width: 80px;
+        max-height: 32px;
+        max-width: 70px;
         object-fit: contain;
-        border-radius: 4px;
+        border-radius: 6px;
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.05));
       }
 
       .school-card h3 {
         margin-top: 0;
-        margin-bottom: 18px;
-        font-size: 1.15rem;
-        color: #121c26;
-        line-height: 1.35;
+        margin-bottom: 12px;
+        font-size: 1.05rem;
+        color: #0f172a;
+        line-height: 1.3;
         letter-spacing: -0.02em;
         font-weight: 800;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
-      .card-pills {
+      /* YENİ: Bilgiler yan yana dizilecek şekilde güncellendi */
+      .card-inline-details {
         display: flex;
-        flex-wrap: wrap; 
-        gap: 6px;
-        margin-bottom: 24px;
-        flex-grow: 1;
-      }
-
-      .info-pill {
-        display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        justify-content: center;
+        gap: 6px;
+        margin-bottom: 20px;
+        flex-grow: 1;
+        align-content: flex-start;
+        color: #475569;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      .detail-item {
+        display: inline-flex;
+        align-items: center;
         gap: 4px;
-        background: #ffffff;
-        color: #4a5568;
-        padding: 6px 10px;
-        border-radius: 8px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        border: 1px solid #f0f4f2;
-        flex: 1 1 auto; 
-        text-align: center;
       }
 
-      .info-pill span {
-        white-space: normal; 
-        line-height: 1.2;
-      }
-
-      .info-pill svg {
-        width: 14px;
-        height: 14px;
-        stroke: var(--primary);
+      .detail-item svg {
+        width: 16px;
+        height: 16px;
+        stroke: #94a3b8;
         fill: none;
+        stroke-width: 2;
         flex-shrink: 0;
       }
 
+      .detail-separator {
+        color: #cbd5e1;
+        font-weight: 700;
+        font-size: 1rem;
+        line-height: 1;
+        margin: 0 2px;
+      }
+
+      /* YENİ: Alt bölümde tam genişlikte yatay buton tasarımı */
       .whatsapp-button {
-        position: relative;
         display: flex;
-        min-height: 46px;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        min-height: 48px;
         padding: 0 16px;
-        color: #fff;
-        background: var(--primary);
-        border-radius: 10px;
-        font-size: 0.95rem;
-        font-weight: 700;
-        text-align: center;
-        transition: background 0.2s ease, transform 0.2s ease;
+        background: transparent;
+        border: 1px solid var(--line);
+        border-radius: 12px;
         text-decoration: none;
+        transition: all 0.3s ease;
+        gap: 8px;
       }
       
-      .whatsapp-button:hover {
-        background: var(--primary-dark);
+      .whatsapp-button span {
+        font-size: 0.85rem;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--muted);
+        transition: color 0.3s ease;
       }
 
       .whatsapp-button svg {
-        position: absolute;
-        right: 14px;
         width: 18px;
         height: 18px;
         fill: none;
-        stroke: currentColor;
-        stroke-width: 2.5;
+        stroke: var(--primary);
+        stroke-width: 2;
         stroke-linecap: round;
         stroke-linejoin: round;
+        transition: all 0.3s ease;
+      }
+
+      .whatsapp-button:hover {
+        background: #f8fafc;
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 181, 226, 0.08);
+      }
+
+      .whatsapp-button:hover span {
+        color: var(--primary-dark);
+      }
+
+      .whatsapp-button:hover svg {
+        transform: translateX(4px);
+        stroke: var(--primary-dark);
       }
 
       .empty-state {
@@ -503,114 +689,226 @@
         background: var(--surface);
         border: 1px solid var(--line);
         border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
       }
 
-      .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 28px;
-      }
-
-      .pricing-card {
+      /* KAHVE BANNER & FORM STİLLERİ AYNEN KORUNDU */
+      .coffee-banner {
         display: flex;
-        min-height: 320px;
-        flex-direction: column;
-        padding: 24px;
-      }
-
-      .pricing-card.featured {
-        color: #fff;
-        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-        border-color: transparent;
-      }
-
-      .coffee-count {
-        display: inline-flex;
-        width: fit-content;
-        min-height: 36px;
         align-items: center;
-        padding: 0 12px;
-        color: var(--primary-dark);
-        background: #e1f5f8;
-        border-radius: 8px;
-        font-size: 0.82rem;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 32px;
+        background: #ffffff;
+        border: 1px solid rgba(245, 158, 11, 0.2);
+        border-radius: 24px;
+        margin-top: 28px;
+        box-shadow: 0 12px 32px -8px rgba(245, 158, 11, 0.12);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .coffee-banner::before {
+        content: '';
+        position: absolute;
+        top: -50%; left: -5%;
+        width: 250px; height: 250px;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, rgba(255,255,255,0) 70%);
+        z-index: 0;
+      }
+
+      .coffee-content-wrapper {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .creator-avatar {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 8px 16px -4px rgba(245, 158, 11, 0.4);
+        flex-shrink: 0;
+      }
+
+      .coffee-banner-text {
+        flex: 1;
+      }
+
+      .coffee-banner-text h3 {
+        color: #0f172a;
+        margin-bottom: 6px;
+        font-size: 1.35rem;
+        letter-spacing: -0.02em;
         font-weight: 800;
       }
 
-      .featured .coffee-count {
-        color: #fff;
-        background: rgba(255, 255, 255, 0.18);
+      .coffee-banner-text p {
+        color: #475569;
+        margin: 0;
+        line-height: 1.55;
+        font-size: 0.95rem;
       }
 
-      .pricing-card h3 {
-        margin: 18px 0 10px;
-        font-size: clamp(1.7rem, 3vw, 2.45rem);
-        line-height: 1;
+      .coffee-banner-text p strong {
+        color: #0f172a;
+        font-weight: 800;
       }
 
-      .pricing-card p {
-        margin-bottom: 22px;
-      }
-
-      .pricing-perks {
-        display: grid;
-        gap: 10px;
-        margin: 0 0 24px;
-        padding: 0;
-        list-style: none;
-      }
-
-      .pricing-perks li {
+      .coffee-banner-btn {
         position: relative;
-        padding-left: 18px;
-        color: var(--muted);
-        line-height: 1.45;
-      }
-
-      .pricing-perks li::before {
-        position: absolute;
-        top: 0.58em;
-        left: 0;
-        width: 7px;
-        height: 7px;
-        background: var(--primary);
-        border-radius: 999px;
-        content: "";
-      }
-
-      .featured p {
-        color: rgba(255, 255, 255, 0.78);
-      }
-
-      .featured .pricing-perks li {
-        color: rgba(255, 255, 255, 0.82);
-      }
-
-      .featured .pricing-perks li::before {
-        background: #fff;
-      }
-
-      .pricing-card .button {
-        width: 100%;
-        margin-top: auto;
-      }
-
-      .payment-note {
-        display: grid;
-        gap: 6px;
-        margin-top: 16px;
-        padding: 18px 20px;
-        box-shadow: none;
-      }
-
-      .payment-note strong {
-        display: block;
+        z-index: 1;
+        background: #f59e0b;
+        color: #ffffff;
+        white-space: nowrap;
+        border: none;
+        padding: 0 28px;
+        min-height: 52px;
+        border-radius: 14px;
         font-size: 1rem;
+        font-weight: 800;
+        box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.5);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
       }
 
-      .payment-note p {
-        margin-bottom: 0;
+      .coffee-banner-btn:hover {
+        background: #d97706;
+        box-shadow: 0 12px 24px -6px rgba(245, 158, 11, 0.6);
+        transform: translateY(-2px);
+      }
+
+      .registration-form-wrapper {
+        margin-top: 48px;
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(226, 232, 240, 0.8);
+      }
+
+      .form-header {
+        margin-bottom: 32px;
+        text-align: center;
+      }
+
+      .form-header h3 {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        color: #0f172a;
+      }
+
+      .form-header p {
+        color: var(--muted);
+      }
+
+      .reg-form {
+        display: grid;
+        gap: 20px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-group label {
+        color: #0f172a;
+        font-size: 0.9rem;
+      }
+
+      .form-group input[type="text"],
+      .form-group input[type="tel"],
+      .form-group input[type="url"],
+      .form-group select {
+        width: 100%;
+        min-height: 48px;
+        padding: 0 16px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        color: #0f172a;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        background: #ffffff;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(0, 181, 226, 0.15);
+      }
+
+      .checkbox-group {
+        display: flex;
+        gap: 24px;
+        padding: 12px 16px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+      }
+
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #475569;
+        font-size: 0.95rem;
+      }
+
+      .checkbox-label input {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--primary);
+      }
+
+      .form-submit-btn {
+        margin-top: 12px;
+        min-height: 56px;
+        font-size: 1.1rem;
+        width: 100%;
+      }
+
+      .form-message {
+        display: none;
+        padding: 16px;
+        border-radius: 12px;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 20px;
+      }
+
+      .form-message.success {
+        display: block;
+        background: #ecfdf5;
+        color: #059669;
+        border: 1px solid #a7f3d0;
+      }
+
+      .form-message.error {
+        display: block;
+        background: #fef2f2;
+        color: #dc2626;
+        border: 1px solid #fecaca;
       }
 
       .site-footer {
@@ -626,26 +924,25 @@
         font-weight: 800;
       }
 
+      /* MEDIA QUERIES (Mobil Uyumluluk) */
       @media (max-width: 1200px) {
-        .school-grid,
-        .filters {
+        .school-grid {
           grid-template-columns: repeat(3, minmax(0, 1fr));
         }
       }
 
       @media (max-width: 1120px) {
-        .hero {
-          grid-template-columns: 1fr;
+        .filter-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
-
-        .pricing-grid {
-          grid-template-columns: 1fr;
+        .search-action-btn {
+          grid-column: 1 / -1;
         }
       }
 
       @media (max-width: 960px) {
         .school-grid,
-        .filters {
+        .stats-horizontal-row {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
@@ -655,6 +952,7 @@
           position: static;
           align-items: flex-start;
           flex-direction: column;
+          background: #0f172a;
         }
 
         .nav-links {
@@ -662,86 +960,190 @@
           justify-content: space-between;
         }
 
-        h1 {
-          font-size: clamp(2.45rem, 12vw, 4rem);
+        .hero-bg-section {
+          padding-top: 60px;
+          padding-bottom: 100px;
         }
 
-        .section-strip,
-        .school-grid,
-        .filters {
+        .hero-bg-section h1 {
+          font-size: clamp(2.4rem, 10vw, 3.5rem);
+        }
+
+        .hero-filter-wrapper {
+          margin-top: -60px;
+          padding: 24px;
+          border-radius: 20px;
+          width: calc(100% - 36px);
+        }
+
+        .filter-grid {
           grid-template-columns: 1fr;
         }
 
-        /* YENİ: Mobil görünümde istatistikleri yan yana zorla ve sığdır */
-        .funnel-list {
-          flex-direction: row;
-          gap: 6px;
+        .section-strip,
+        .school-grid {
+          grid-template-columns: 1fr;
         }
 
-        .funnel-list div {
-          padding: 12px 8px;
-          min-height: auto;
+        .stats-horizontal-row {
+          grid-template-columns: repeat(2, 1fr); /* Mobilde alt alta inmek yerine 2'li yan yana minik kartlar */
+          gap: 12px;
+        }
+
+        .stat-card {
+          padding: 12px;
+          gap: 10px;
+        }
+
+        .stat-icon {
+          width: 36px;
+          height: 36px;
+        }
+
+        .stat-icon svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        .stat-details strong {
+          font-size: 1.15rem;
+        }
+
+        .coffee-banner {
+          flex-direction: column;
           text-align: center;
+          padding: 28px 20px;
         }
 
-        .funnel-list span {
-          font-size: 0.75rem;
-          margin-bottom: 4px;
+        .coffee-content-wrapper {
+          flex-direction: column;
         }
-
-        .funnel-list strong {
-          font-size: 1.25rem;
-        }
-
-        label {
+        
+        .coffee-banner-btn {
           width: 100%;
+          justify-content: center;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
         }
       }
     </style>
   </head>
   <body>
     <div class="app-container">
-      <main id="top">
-        <section class="hero">
-          <div class="hero-copy">
-            <h1>Çocuğunuz için en yakın spor okulundan <span class="free-highlight">ÜCRETSİZ</span> deneme dersi alın.</h1>
-            <p class="hero-text">
-              Futbol, basketbol, voleybol, yüzme ve cimnastik okullarını tek
-              sayfada karşılaştırın. Beğendiğiniz okulun WhatsApp hattına hazır
-              deneme dersi mesajı gönderin.
-            </p>
-            <div class="hero-actions">
-              <a class="button primary" href="#okullar">Okulları gör</a>
-              <a class="button ghost" href="#kayit">Okulunuzu ekleyin</a>
-            </div>
-          </div>
+      
+      <!-- ŞEFFAF HEADER -->
+      <header class="site-header">
+        <div class="brand">
+          <div class="brand-mark">SK</div>
+          <span>SporKayıt</span>
+        </div>
+        <nav class="nav-links">
+          <a href="#top">Ana Sayfa</a>
+          <a href="#okullar">Okullar</a>
+        </nav>
+        <div class="header-actions">
+          <a class="button" href="#kayit">Okul Kaydı</a>
+        </div>
+      </header>
 
-          <aside class="score-panel" aria-label="Platform özeti">
-            <div class="panel-topline">
-              <span>Listelenen okul</span>
+      <main id="top">
+        
+        <!-- YENİ MODERN HERO ALANI -->
+        <section class="hero-bg-section">
+          <div class="hero-content-wrapper">
+             <div class="hero-tags">
+               <span class="hero-tag">Basketbol</span>
+               <span class="hero-tag">Voleybol</span>
+               <span class="hero-tag">Yüzme</span>
+             </div>
+             <h1>Geleceği İnşa Et,<br>Doğru Spor Okuluyla.</h1>
+             <p>Türkiye'nin en kapsamlı altyapı ve spor okulu platformu. Çocuğunuz için en uygun branşı, lokasyonu seçin ve ücretsiz deneme dersinizi anında alın.</p>
+          </div>
+        </section>
+
+        <!-- YENİ YÜZEYE ÇIKAN FİLTRELEME KARTI -->
+        <div class="hero-filter-wrapper">
+           <h3>En uygun okulu bulun</h3>
+           
+           <div class="filter-grid" aria-label="Okul filtreleri">
+              <div class="filter-col">
+                <label>Branş</label>
+                <select id="sport-filter">
+                  <option value="">Tüm branşlar</option>
+                </select>
+              </div>
+              <div class="filter-col">
+                <label>İl</label>
+                <select id="city-filter">
+                  <option value="">Tüm iller</option>
+                </select>
+              </div>
+              <div class="filter-col">
+                <label>İlçe</label>
+                <select id="district-filter" disabled>
+                  <option value="">Önce il seçin</option>
+                </select>
+              </div>
+              <div class="filter-col">
+                <label>Yaş Grubu</label>
+                <select id="age-filter">
+                  <option value="">Tüm yaşlar</option>
+                </select>
+              </div>
+              <button class="search-action-btn" onclick="document.getElementById('okullar').scrollIntoView({behavior: 'smooth'})">
+                Okulları Bul
+              </button>
+           </div>
+
+           <div class="quick-filters">
+              <span class="quick-label">Popüler Aramalar:</span>
+              <span class="quick-tag" onclick="document.getElementById('sport-filter').value='Basketbol'; document.getElementById('sport-filter').dispatchEvent(new Event('change')); document.getElementById('okullar').scrollIntoView({behavior: 'smooth'})">Basketbol</span>
+              <span class="quick-tag" onclick="document.getElementById('city-filter').value='İstanbul'; document.getElementById('city-filter').dispatchEvent(new Event('change')); document.getElementById('okullar').scrollIntoView({behavior: 'smooth'})">İstanbul</span>
+              <span class="quick-tag" onclick="document.getElementById('sport-filter').value='Yüzme'; document.getElementById('sport-filter').dispatchEvent(new Event('change')); document.getElementById('okullar').scrollIntoView({behavior: 'smooth'})">Yüzme</span>
+           </div>
+        </div>
+
+        <!-- İSTATİSTİKLER (Eski Score Panel Yeni Tasarımda Yatay Olarak Eklendi) -->
+        <div class="stats-horizontal-row">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="stat-details">
+              <span>Aktif Okul</span>
               <strong id="school-count">0</strong>
             </div>
-            <div class="funnel-list">
-              <div>
-                <span>Branş</span>
-                <strong id="sport-count">0</strong>
-              </div>
-              <div>
-                <span>İlçe</span>
-                <strong id="district-count">0</strong>
-              </div>
-              <div>
-                <span>WhatsApp</span>
-                <strong id="whatsapp-count">0 tik</strong>
-              </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
             </div>
-            <div class="offer-box">
-              <span>Okul kaydı</span>
-              <strong>1 kahve = 2 ay</strong>
-              <p>Kayıt paketini seçin, okulunuzu listeye ekleyelim.</p>
+            <div class="stat-details">
+              <span>Branş Çeşitliliği</span>
+              <strong id="sport-count">0</strong>
             </div>
-          </aside>
-        </section>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="stat-details">
+              <span>Farklı İlçe</span>
+              <strong id="district-count">0</strong>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="stat-details">
+              <span>Yönlendirilen Veli</span>
+              <strong id="whatsapp-count">0 tik</strong>
+            </div>
+          </div>
+        </div>
 
         <section class="section-strip" aria-label="Platform özellikleri">
           <article>
@@ -758,124 +1160,138 @@
           </article>
         </section>
 
+        <!-- YENİ EKLENEN OKULLAR -->
+        <section class="recent-schools-section" aria-label="Yeni Eklenen Okullar">
+          <div class="section-heading">
+            <h2>Aramıza Yeni Katılan Okullar</h2>
+            <p>Platformumuza en son eklenen 4 spor okulunu hemen inceleyin.</p>
+          </div>
+          <div class="school-grid" id="recent-school-list" aria-live="polite">
+            <!-- JavaScript ile son 4 okul buraya eklenecek -->
+          </div>
+        </section>
+
+        <!-- TÜM OKULLAR -->
         <section class="schools-section" id="okullar">
           <div class="section-heading">
-            <p class="eyebrow">Spor okulları</p>
-            <h2>Ücretsiz deneme dersi alabileceğiniz okullar</h2>
+            <!-- "Spor okulları" eyebrow yazısı buradan silindi -->
+            <h2>Tüm Okulları İnceleyin</h2>
             <p>
-              Filtreleri kullanarak size uygun okulu bulun. Deneme dersi butonu,
-              o okulun kendi WhatsApp numarasına mesaj gönderir.
+              Listenizi inceleyin, beğendiğiniz okulun WhatsApp hattından anında deneme dersi randevunuzu alın.
             </p>
           </div>
 
-          <div class="filters" aria-label="Okul filtreleri">
-            <label>
-              Branş
-              <select id="sport-filter">
-                <option value="">Tüm branşlar</option>
-              </select>
-            </label>
-            <label>
-              İl
-              <select id="city-filter">
-                <option value="">Tüm iller</option>
-              </select>
-            </label>
-            <label>
-              İlçe
-              <select id="district-filter" disabled>
-                <option value="">Önce il seçin</option>
-              </select>
-            </label>
-            <label>
-              Yaş
-              <select id="age-filter">
-                <option value="">Tüm yaşlar</option>
-              </select>
-            </label>
-          </div>
-
           <div class="school-grid" id="school-list" aria-live="polite"></div>
+          
+          <!-- YENİ EKLENEN: Sayfalama Butonlarının Geleceği Alan -->
+          <div class="pagination-container" id="pagination-controls"></div>
         </section>
 
+        <!-- KAYIT ALANI -->
         <section class="register-section" id="kayit">
           <div class="section-heading">
-            <p class="eyebrow">Spor okulları için</p>
+            <!-- "Spor okulları için" eyebrow yazısı buradan silindi -->
             <h2>Okulunuzu SporKayıt listesine ekleyin.</h2>
             <p>
               Okul kartınızda branşınız, ilçeniz, yaş aralığınız, tesis
               bilginiz ve WhatsApp deneme dersi butonunuz yer alır.
             </p>
           </div>
-          <div class="pricing-grid" aria-label="Okul kayıt paketleri">
-            <article class="pricing-card">
-              <span class="coffee-count">1 kahve</span>
-              <h3>2 ay kullanım</h3>
-              <p>1 ay kayıt + 1 ay hediye. Yeni başlayan okullar için hızlı deneme paketi.</p>
-              <ul class="pricing-perks">
-                <li>Okul kartı yayına alınır</li>
-                <li>WhatsApp deneme dersi butonu eklenir</li>
-                <li>Branş ve ilçe filtrelerinde görünür</li>
-              </ul>
-              <a
-                class="button ghost"
-                href="https://buymeacoffee.com/bedenegitimi"
-                data-payment-link
-                target="_blank"
-                rel="noopener"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
-                1 kahve ile kayıt ol
-              </a>
-            </article>
-
-            <article class="pricing-card">
-              <span class="coffee-count">3 kahve</span>
-              <h3>6 ay kullanım</h3>
-              <p>3 ay kayıt + 3 ay hediye. Yeni dönem, ara tatil ve kayıt yoğunluğu için güçlü paket.</p>
-              <ul class="pricing-perks">
-                <li>Okul kartı yayında kalır</li>
-                <li>Liste içinde öne çıkan bilgi alanı</li>
-                <li>Program ve tesis bilgileri güncellenebilir</li>
-              </ul>
-              <a
-                class="button ghost"
-                href="https://buymeacoffee.com/bedenegitimi"
-                data-payment-link
-                target="_blank"
-                rel="noopener"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
-                3 kahve ile kayıt ol
-              </a>
-            </article>
-
-            <article class="pricing-card featured">
-              <span class="coffee-count">5 kahve</span>
-              <h3>10 ay kullanım</h3>
-              <p>5 ay kayıt + 5 ay hediye. Eylül ayından haziran sonuna kadar tüm sezonu kapsar.</p>
-              <ul class="pricing-perks">
-                <li>Tüm sezon kesintisiz görünürlük</li>
-                <li>Sezon paketi olarak öne çıkarılır</li>
-                <li>Kayıt dönemlerinde bilgi güncelleme desteği</li>
-              </ul>
-              <a
-                class="button primary"
-                href="https://buymeacoffee.com/bedenegitimi"
-                data-payment-link
-                target="_blank"
-                rel="noopener"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
-                5 kahve ile sezonu al
-              </a>
-            </article>
+          
+          <div class="coffee-banner">
+            <div class="coffee-content-wrapper">
+              <div class="creator-avatar" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;">
+                  <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+                  <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+                  <line x1="6" x2="6" y1="2" y2="4"/>
+                  <line x1="10" x2="10" y1="2" y2="4"/>
+                  <line x1="14" x2="14" y1="2" y2="4"/>
+                </svg>
+              </div>
+              <div class="coffee-banner-text">
+                <h3>Platform Tamamen Ücretsiz! 🎉</h3>
+                <p>Merhaba, ben <strong>Kürşat Buğra Karaoğlan</strong>. Bu platformu tamamen ücretsiz geliştirdim. Kod yazarken ekran başında uyuyakalmamam için bana bir kahve ısmarlayarak destek olabilirsiniz. ☕</p>
+              </div>
+            </div>
+            <a class="button coffee-banner-btn" href="https://buymeacoffee.com/bedenegitimi" target="_blank" rel="noopener">
+              Kürşat'a Kahve Ismarla
+            </a>
           </div>
 
-          <div class="payment-note">
-            <strong>Ödeme sayfasında</strong>
-            <p>Buy Me a Coffee sayfasında almak istediğiniz paket kadar kahve adedini seçin: 1, 3 veya 5.</p>
+          <div class="registration-form-wrapper" id="okul-ekle-form">
+            <div class="form-header">
+              <h3>Hemen Kaydınızı Oluşturun</h3>
+              <p>Bilgilerinizi doldurun, okulunuz listemizde anında yayınlansın.</p>
+            </div>
+            
+            <form class="reg-form" id="schoolForm">
+              <div class="form-group">
+                <label for="f_okul">Spor Okulu Adı *</label>
+                <input type="text" id="f_okul" required placeholder="Örn: Fenerbahçe Ataşehir Basketbol Okulu">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f_brans">Branş *</label>
+                  <select id="f_brans" required>
+                    <option value="">Seçiniz...</option>
+                    <option value="Basketbol">Basketbol</option>
+                    <option value="Futbol">Futbol</option>
+                    <option value="Voleybol">Voleybol</option>
+                    <option value="Yüzme">Yüzme</option>
+                    <option value="Cimnastik">Cimnastik</option>
+                    <option value="Tenis">Tenis</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="f_whatsapp">WhatsApp Numarası *</label>
+                  <input type="tel" id="f_whatsapp" required placeholder="05XX XXX XX XX">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f_il">İl *</label>
+                  <input type="text" id="f_il" required placeholder="Örn: İstanbul">
+                </div>
+                <div class="form-group">
+                  <label for="f_ilce">İlçe *</label>
+                  <input type="text" id="f_ilce" required placeholder="Örn: Ataşehir">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f_yas">Yaş Grubu *</label>
+                  <input type="text" id="f_yas" required placeholder="Örn: 6-14">
+                </div>
+                <div class="form-group">
+                  <label>Antrenman Günleri *</label>
+                  <div class="checkbox-group">
+                    <label class="checkbox-label">
+                      <input type="checkbox" id="f_haftaIci"> Hafta İçi
+                    </label>
+                    <label class="checkbox-label">
+                      <input type="checkbox" id="f_haftaSonu"> Hafta Sonu
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="f_logo">Logo URL (İsteğe Bağlı)</label>
+                <input type="url" id="f_logo" placeholder="Google Drive görsel linki veya site adresi">
+              </div>
+
+              <button type="submit" class="button primary form-submit-btn" id="submitBtn">
+                Kaydı Gönder ve Listeye Ekle
+              </button>
+
+              <div id="formStatus" class="form-message"></div>
+            </form>
           </div>
+
         </section>
       </main>
 
@@ -889,8 +1305,13 @@
       const googleScriptURL = "https://script.google.com/macros/s/AKfycbytThQGVOohZZffQnOGTFbYAJrLNBUaHs8cTscwLJalmqTBMDQzwU6ErD7pvfcZHCM/exec"; 
 
       let schools = [];
+      // YENİ EKLENEN: Sayfalama (Pagination) için durum değişkenleri
+      let filteredData = []; 
+      let currentPage = 1;
+      const itemsPerPage = 15;
 
       const schoolList = document.getElementById("school-list");
+      const recentSchoolList = document.getElementById("recent-school-list");
       const sportFilter = document.getElementById("sport-filter");
       const cityFilter = document.getElementById("city-filter");
       const districtFilter = document.getElementById("district-filter");
@@ -906,7 +1327,7 @@
       const iconAge = `<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`;
       const iconCal = `<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`;
 
-      // Spor Branşı İkonları (Modern Vektörel Çizgi Seti)
+      // Spor Branşı İkonları
       const svgBasketball = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2v20" /><path d="M6 6.5a9 9 0 0 1 0 11" /><path d="M18 6.5a9 9 0 0 0 0 11" /></svg>`;
       const svgSoccer = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16l-3.5-2.5v-3L12 8l3.5 2.5v3L12 16z"/><path d="M12 16v6"/><path d="M8.5 13.5l-6 2.5"/><path d="M15.5 13.5l6 2.5"/><path d="M8.5 10.5L3 7"/><path d="M15.5 10.5L21 7"/><path d="M12 8V2"/></svg>`;
       const svgVolleyball = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a14 14 0 0 1 0 20"/><path d="M12 2a14 14 0 0 0 0 20"/></svg>`;
@@ -988,11 +1409,62 @@
         countDistrict.textContent = getUniqueValues(data, 'district').length;
       }
 
-      function renderSchools(data) {
-        schoolList.innerHTML = "";
+      // YENİ EKLENEN: Sayfa değiştirme fonksiyonu
+      function goToPage(page) {
+        currentPage = page;
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const paginatedData = filteredData.slice(startIndex, endIndex);
+        
+        // Sadece bulunduğumuz sayfanın datasını ekrana çizdiriyoruz
+        renderSchools(paginatedData, schoolList);
+        renderPagination();
+        
+        // Sayfa değiştiğinde listeye odaklanması için yukarı kaydır
+        document.getElementById('okullar').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // YENİ EKLENEN: Sayfa numaralarını ve butonları oluşturan fonksiyon
+      function renderPagination() {
+        const container = document.getElementById('pagination-controls');
+        container.innerHTML = '';
+        
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+        
+        // Eğer 1 sayfa veya 0 veri varsa sayfalama tuşlarını gösterme
+        if (totalPages <= 1) return;
+
+        // Geri Butonu
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'page-btn';
+        prevBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M15 18l-6-6 6-6"/></svg>';
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.onclick = () => goToPage(currentPage - 1);
+        container.appendChild(prevBtn);
+
+        // Numaralı Butonlar (1, 2, 3...)
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement('button');
+          btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+          btn.innerText = i;
+          btn.onclick = () => goToPage(i);
+          container.appendChild(btn);
+        }
+
+        // İleri Butonu
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'page-btn';
+        nextBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M9 18l6-6-6-6"/></svg>';
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.onclick = () => goToPage(currentPage + 1);
+        container.appendChild(nextBtn);
+      }
+
+      function renderSchools(data, containerElement) {
+        containerElement.innerHTML = "";
 
         if (data.length === 0) {
-          schoolList.innerHTML = `<div class="empty-state">Seçtiğiniz filtrelere uygun okul bulunamadı. Lütfen aramayı genişletin.</div>`;
+          containerElement.innerHTML = `<div class="empty-state">Seçtiğiniz filtrelere uygun okul bulunamadı. Lütfen aramayı genişletin.</div>`;
           return;
         }
 
@@ -1004,15 +1476,37 @@
           const message = encodeURIComponent(`Merhaba, SporKayıt platformundan ulaşıyorum. ${school.name} için ücretsiz deneme dersi almak istiyorum. Bilgi alabilir miyim?`);
           const whatsappUrl = `https://wa.me/${cleanPhone}?text=${message}`;
 
-          // Yeni modern ikonların ataması
+          /* YENİ: Dinamik renk sistemi ve temalar */
           let sportIcon = svgDefault;
+          let themeColor = "#4f46e5"; // İndigo/Lacivert (Sisteme yeni eklenecek bilinmeyen branşlar için Joker renk)
+          let themeBg = "#e0e7ff";
+
           const s = (school.sport || '').toLowerCase();
-          if (s.includes('basketbol')) sportIcon = svgBasketball;
-          else if (s.includes('futbol')) sportIcon = svgSoccer;
-          else if (s.includes('voleybol')) sportIcon = svgVolleyball;
-          else if (s.includes('yüzme') || s.includes('yuzme')) sportIcon = svgSwimming;
-          else if (s.includes('cimnastik') || s.includes('jimnastik')) sportIcon = svgGymnastics;
-          else if (s.includes('tenis')) sportIcon = svgTennis;
+          if (s.includes('basketbol')) {
+             sportIcon = svgBasketball;
+             themeColor = "#ea580c"; // Turuncu tema
+             themeBg = "#ffedd5";
+          } else if (s.includes('futbol')) {
+             sportIcon = svgSoccer;
+             themeColor = "#16a34a"; // Yeşil tema
+             themeBg = "#dcfce7";
+          } else if (s.includes('voleybol')) {
+             sportIcon = svgVolleyball;
+             themeColor = "#9333ea"; // Mor tema
+             themeBg = "#f3e8ff";
+          } else if (s.includes('yüzme') || s.includes('yuzme')) {
+             sportIcon = svgSwimming;
+             themeColor = "#0284c7"; // Mavi tema
+             themeBg = "#e0f2fe";
+          } else if (s.includes('cimnastik') || s.includes('jimnastik')) {
+             sportIcon = svgGymnastics;
+             themeColor = "#db2777"; // Pembe tema
+             themeBg = "#fce7f3";
+          } else if (s.includes('tenis')) {
+             sportIcon = svgTennis;
+             themeColor = "#0d9488"; // Turkuaz/Teal tema
+             themeBg = "#ccfbf1";
+          }
 
           let logoUrl = school.logo ? school.logo.trim() : '';
           if (logoUrl && logoUrl.includes('drive.google.com')) {
@@ -1037,49 +1531,54 @@
           const isWeekday = school.weekday && school.weekday.trim().toLowerCase() === 'x';
           const isWeekend = school.weekend && school.weekend.trim().toLowerCase() === 'x';
           
+          /* YENİ: Etiketlerin HTML yapıları div/pill yerine span'a çevrildi */
           if (isWeekday && isWeekend) {
-            scheduleHtml = `<div class="info-pill" title="Hafta İçi ve Sonu">${iconCal} <span>Hafta İçi ve Sonu</span></div>`;
+            scheduleHtml = `<span class="detail-item" title="Hafta İçi ve Sonu">${iconCal} <span>H.İçi/Sonu</span></span>`;
           } else if (isWeekday) {
-            scheduleHtml = `<div class="info-pill" title="Hafta İçi">${iconCal} <span>Hafta İçi</span></div>`;
+            scheduleHtml = `<span class="detail-item" title="Hafta İçi">${iconCal} <span>Hafta İçi</span></span>`;
           } else if (isWeekend) {
-            scheduleHtml = `<div class="info-pill" title="Hafta Sonu">${iconCal} <span>Hafta Sonu</span></div>`;
+            scheduleHtml = `<span class="detail-item" title="Hafta Sonu">${iconCal} <span>Hafta Sonu</span></span>`;
           } else if (school.schedule) {
-            scheduleHtml = `<div class="info-pill" title="${school.schedule}">${iconCal} <span>${school.schedule}</span></div>`;
+            scheduleHtml = `<span class="detail-item" title="${school.schedule}">${iconCal} <span>${school.schedule}</span></span>`;
           }
 
-          const locationText = [school.city, school.district].filter(Boolean).join(' / ');
+          /* YENİ: Sadece İl bilgisi gösterilecek */
+          const locationText = school.city ? school.city : '';
+          const locHtml = locationText ? `<span class="detail-item" title="${locationText}">${iconLoc} <span>${locationText}</span></span>` : '';
 
           let ageHtml = '';
           if (school.age) {
-             ageHtml = `<div class="info-pill" title="${school.age} Yaş">${iconAge} <span>${school.age} Yaş</span></div>`;
+             ageHtml = `<span class="detail-item" title="${school.age} Yaş">${iconAge} <span>${school.age} Yaş</span></span>`;
           }
+
+          /* YENİ: Bilgiler yan yana dizildiği için aralarına '·' işareti eklendi */
+          const detailsArray = [locHtml, ageHtml, scheduleHtml].filter(Boolean);
+          const detailsHtml = detailsArray.join('<span class="detail-separator">&middot;</span>');
 
           const card = document.createElement("article");
           card.className = "school-card";
           
+          /* YENİ: HTML içeriğine style öznitelikleri (themeColor, themeBg) ile dinamik renkler eklendi */
           card.innerHTML = `
             <div class="card-header">
-              <div class="sport-tag">
-                <div class="sport-icon-box">${sportIcon}</div>
+              <div class="sport-tag" style="color: ${themeColor};">
+                <div class="sport-icon-box" style="background-color: ${themeBg}; color: ${themeColor};">
+                  ${sportIcon}
+                </div>
                 <span class="sport-name">${school.sport}</span>
               </div>
               ${logoHtml}
             </div>
             <h3>${school.name}</h3>
-            <div class="card-pills">
-              <div class="info-pill" title="${locationText}">
-                ${iconLoc}
-                <span>${locationText}</span>
-              </div>
-              ${ageHtml}
-              ${scheduleHtml}
+            <div class="card-inline-details">
+              ${detailsHtml}
             </div>
             <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="whatsapp-button">
-              Ücretsiz Deneme Dersi Al
+              <span>Ücretsiz Deneme Dersi İçin Başvur</span>
               <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           `;
-          schoolList.appendChild(card);
+          containerElement.appendChild(card); 
         });
       }
 
@@ -1098,7 +1597,9 @@
           return matchSport && matchCity && matchDistrict && matchAge;
         });
 
-        renderSchools(filtered);
+        // GÜNCELLENEN: Filtrelenmiş datayı sayfalama sistemine aktarıp 1. sayfadan başlatıyoruz
+        filteredData = filtered;
+        goToPage(1); 
       }
 
       async function loadSchoolsData() {
@@ -1224,17 +1725,78 @@
       districtFilter.addEventListener("change", filterSchools);
       ageFilter.addEventListener("change", filterSchools);
 
+      const schoolForm = document.getElementById('schoolForm');
+      const submitBtn = document.getElementById('submitBtn');
+      const formStatus = document.getElementById('formStatus');
+
+      schoolForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'Gönderiliyor... Lütfen bekleyin.';
+        submitBtn.disabled = true;
+        formStatus.className = 'form-message'; 
+
+        const formData = {
+          okul: document.getElementById('f_okul').value,
+          brans: document.getElementById('f_brans').value,
+          whatsapp: document.getElementById('f_whatsapp').value,
+          il: document.getElementById('f_il').value,
+          ilce: document.getElementById('f_ilce').value,
+          yas: document.getElementById('f_yas').value,
+          haftaIci: document.getElementById('f_haftaIci').checked,
+          haftaSonu: document.getElementById('f_haftaSonu').checked,
+          logo: document.getElementById('f_logo').value
+        };
+
+        try {
+          const response = await fetch(googleScriptURL, {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+              'Content-Type': 'text/plain;charset=utf-8',
+            }
+          });
+
+          const result = await response.json();
+
+          if (result.status === 'success') {
+            formStatus.textContent = '✅ Kaydınız başarıyla alındı! Tablonuza eklendi.';
+            formStatus.className = 'form-message success';
+            schoolForm.reset(); 
+          } else {
+            throw new Error("Sunucu hatası");
+          }
+        } catch (error) {
+          formStatus.textContent = '❌ Gönderim sırasında bir hata oluştu. Lütfen tekrar deneyin.';
+          formStatus.className = 'form-message error';
+          console.error("Form error:", error);
+        } finally {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
+      });
+
       async function init() {
         schoolList.innerHTML = `<div class="empty-state">Okullar yükleniyor... Lütfen bekleyin.</div>`;
+        recentSchoolList.innerHTML = `<div class="empty-state">Yükleniyor...</div>`;
         try {
           await loadSchoolsData();
           await loadNationalData();
           populateFilters();
           updateStats(schools);
-          renderSchools(schools);
+          
+          const recentSchools = [...schools].reverse().slice(0, 4);
+          renderSchools(recentSchools, recentSchoolList);
+          
+          // GÜNCELLENEN: Veriyi sayfalama sistemine aktar ve ilk sayfayı çiz
+          filteredData = schools;
+          goToPage(1);
+          
           await fetchTotalClicks();
         } catch (error) {
           schoolList.innerHTML = `<div class="empty-state">Veriler yüklenemedi. Lütfen Google E-Tablo paylaşım ayarlarını kontrol edin.</div>`;
+          recentSchoolList.innerHTML = `<div class="empty-state">Veriler yüklenemedi.</div>`;
         }
       }
 
