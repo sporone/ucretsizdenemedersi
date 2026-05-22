@@ -126,7 +126,7 @@
         box-shadow: none;
       }
 
-      /* MODERN HERO ALANI (BASKETBOL GÖRSELİ) */
+      /* MODERN HERO ALANI */
       .hero-bg-section {
         position: relative;
         background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1515523110800-9415d13b84a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
@@ -346,20 +346,22 @@
       .section-heading p { color: var(--muted); line-height: 1.6; }
       .section-heading h2 { margin-bottom: 16px; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; color: #0f172a; }
 
+      /* KARTVİZİT ORANLARI İÇİN GÜNCELLENEN GRID */
       .school-grid {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(4, minmax(0, 1fr)); /* 3 Sütundan 4'e çıkarıldı */
+        gap: 16px; /* 4 sütun için aralık daraltıldı */
       }
 
-      /* YENİ EKLENEN DARK KART STİLLERİ (WATERMARK EFEKTLİ) */
+      /* YENİ EKLENEN DARK KART STİLLERİ (KARTVİZİT ÖLÇÜLERİ) */
       .school-card {
         position: relative;
         display: flex;
         flex-direction: column;
-        padding: 24px;
+        justify-content: space-between;
+        padding: 16px; /* 4 sütuna sığması için 20px'ten 16px'e düşürüldü */
         background: var(--card-bg, #0b1b3d);
-        border-radius: 20px;
+        border-radius: 16px; /* Kartvizite uygun olarak biraz daha keskinleştirildi */
         box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
         border: none;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -402,19 +404,19 @@
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        margin-bottom: 20px;
+        margin-bottom: 10px; /* 12px'ten düşürüldü */
       }
 
       .sport-tag {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 4px; /* 6px'ten düşürüldü */
         background: var(--card-accent, #e2ff2b);
         color: var(--card-bg, #0b1b3d);
-        padding: 6px 14px;
-        border-radius: 12px;
+        padding: 4px 10px; /* 4px 12px'ten düşürüldü */
+        border-radius: 10px;
         font-weight: 800;
-        font-size: 0.95rem;
+        font-size: 0.8rem; /* 0.85rem'den düşürüldü */
         letter-spacing: -0.01em;
       }
 
@@ -425,15 +427,15 @@
       }
 
       .sport-icon-box svg {
-        width: 20px;
-        height: 20px;
+        width: 16px; /* 18px'ten düşürüldü */
+        height: 16px;
         stroke: var(--card-bg, #0b1b3d);
         stroke-width: 2.5;
       }
 
       .school-logo {
-        width: 44px;
-        height: 44px;
+        width: 32px; /* 38px'ten düşürüldü */
+        height: 32px;
         object-fit: contain;
         border-radius: 50%;
         background: #ffffff;
@@ -443,8 +445,8 @@
 
       .school-card h3 {
         margin-top: 0;
-        margin-bottom: 20px;
-        font-size: 1.35rem;
+        margin-bottom: 10px; /* 12px'ten düşürüldü */
+        font-size: 1.05rem; /* 1.15rem'den düşürüldü */
         color: #ffffff;
         line-height: 1.3;
         letter-spacing: -0.02em;
@@ -459,24 +461,24 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 8px;
-        margin-bottom: 24px;
+        gap: 4px; /* 6px'ten düşürüldü */
+        margin-bottom: 14px; /* 16px'ten düşürüldü */
         flex-grow: 1;
         align-content: flex-start;
         color: #e2e8f0;
-        font-size: 0.9rem;
+        font-size: 0.8rem; /* 0.85rem'den düşürüldü */
         font-weight: 500;
       }
 
       .detail-item {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 4px; /* 4px sabitlendi */
       }
 
       .detail-item svg {
-        width: 18px;
-        height: 18px;
+        width: 14px; /* 16px'ten düşürüldü */
+        height: 14px;
         stroke: var(--card-accent, #e2ff2b);
         fill: none;
         stroke-width: 2.5;
@@ -486,9 +488,9 @@
       .detail-separator {
         color: rgba(255,255,255,0.4);
         font-weight: 800;
-        font-size: 1.2rem;
+        font-size: 0.9rem; /* 1rem'den düşürüldü */
         line-height: 1;
-        margin: 0 4px;
+        margin: 0 2px; /* 4px'ten düşürüldü */
       }
 
       .whatsapp-button {
@@ -497,25 +499,25 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        min-height: 52px;
-        padding: 0 20px;
+        min-height: 40px; /* 44px'ten düşürüldü */
+        padding: 0 12px; /* 16px'ten düşürüldü */
         background: var(--card-accent, #e2ff2b);
         border: none;
-        border-radius: 14px;
+        border-radius: 12px;
         text-decoration: none;
         transition: all 0.3s ease;
       }
       
       .whatsapp-button span {
-        font-size: 0.95rem;
+        font-size: 0.8rem; /* 0.85rem'den düşürüldü */
         font-weight: 800;
         line-height: 1;
         color: var(--card-bg, #0b1b3d);
       }
 
       .whatsapp-button svg {
-        width: 20px;
-        height: 20px;
+        width: 16px; /* 18px'ten düşürüldü */
+        height: 16px;
         fill: none;
         stroke: var(--card-bg, #0b1b3d);
         stroke-width: 2.5;
