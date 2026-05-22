@@ -52,7 +52,7 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        position: relative; /* DÜZELTME: Header'ın ekranın en uçlarına taşmasını engeller, 1400px içinde tutar */
+        position: relative;
       }
 
       a {
@@ -66,7 +66,7 @@
         font: inherit;
       }
 
-      /* YENİ HEADER TASARIMI (Daha şeffaf ve entegre) */
+      /* HEADER TASARIMI */
       .site-header {
         position: absolute;
         top: 0;
@@ -83,8 +83,8 @@
       }
 
       .brand {
-        display: flex; /* DÜZELTME: SK kutusu ve yazıyı yan yana alır */
-        align-items: center; /* DÜZELTME: İkisini dikeyde ortalar */
+        display: flex;
+        align-items: center;
         gap: 10px;
         font-weight: 800;
         color: #ffffff;
@@ -117,24 +117,24 @@
       }
 
       .header-actions .button {
-        background: #ffffff;
-        color: #0f172a;
+        background: #e2ff2b;
+        color: #0b1b3d;
         padding: 10px 24px;
         border-radius: 30px;
         font-size: 0.9rem;
+        font-weight: 800;
         box-shadow: none;
       }
 
-      /* YENİ EKLENEN MODERN HERO ALANI */
+      /* MODERN HERO ALANI (BASKETBOL GÖRSELİ) */
       .hero-bg-section {
         position: relative;
-        /* Fitness salonu yerine daha uygun, premium bir kapalı basketbol/voleybol salonu görseli eklendi */
-        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1515523110800-9415d13b84a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
         min-height: 85vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 120px clamp(18px, 5vw, 72px) 160px; /* Alttan kart için boşluk bırakıldı */
+        padding: 120px clamp(18px, 5vw, 72px) 160px;
         color: #ffffff;
       }
 
@@ -157,12 +157,13 @@
       }
 
       .hero-tag {
-        background: #ffffff;
-        color: #0f172a;
+        background: #e2ff2b;
+        color: #0b1b3d;
         padding: 8px 20px;
         border-radius: 30px;
         font-size: 0.9rem;
-        font-weight: 700;
+        font-weight: 800;
+        text-transform: uppercase;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       }
 
@@ -183,12 +184,12 @@
         font-weight: 400;
       }
 
-      /* HERO ÜZERİNE BİNEN FİLTRE KARTI (Görseldeki gibi) */
+      /* FİLTRE KARTI */
       .hero-filter-wrapper {
         position: relative;
         max-width: 1200px;
         width: calc(100% - clamp(36px, 10vw, 144px));
-        margin: -100px auto 40px; /* Yukarı doğru taşıyarak resmin üzerine bindirir */
+        margin: -100px auto 40px;
         background: #ffffff;
         border-radius: 24px;
         padding: 24px 32px;
@@ -267,7 +268,6 @@
         box-shadow: 0 14px 24px rgba(15, 23, 42, 0.25);
       }
 
-      /* Popüler Aramalar Şeridi */
       .quick-filters {
         display: flex;
         align-items: center;
@@ -278,31 +278,17 @@
         flex-wrap: wrap;
       }
 
-      .quick-label {
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: #0f172a;
-      }
+      .quick-label { font-size: 0.9rem; font-weight: 700; color: #0f172a; }
 
       .quick-tag {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        padding: 6px 16px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: #64748b;
-        cursor: pointer;
-        transition: all 0.2s ease;
+        background: #ffffff; border: 1px solid #e2e8f0; padding: 6px 16px;
+        border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #64748b;
+        cursor: pointer; transition: all 0.2s ease;
       }
 
-      .quick-tag:hover {
-        background: #f8fafc;
-        border-color: #cbd5e1;
-        color: #0f172a;
-      }
+      .quick-tag:hover { background: #f8fafc; border-color: #cbd5e1; color: #0f172a; }
 
-      /* İSTATİSTİK ŞERİDİ (Eski sağ paneli yatay yaptık) */
+      /* İSTATİSTİK ŞERİDİ */
       .stats-horizontal-row {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -313,161 +299,52 @@
       }
 
       .stat-card {
-        display: flex;
-        flex-direction: row; /* Dikeyden yataya çevirdik */
-        align-items: center; /* İkon ve metni ortaladık */
-        padding: 16px 20px; /* İç boşluğu küçülttük */
-        gap: 16px; /* İkon ve metin arası boşluk */
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 16px; /* Daha minik kenar yuvarlaklığı */
+        display: flex; flex-direction: row; align-items: center;
+        padding: 16px 20px; gap: 16px; background: #ffffff;
+        border: 1px solid #e2e8f0; border-radius: 16px;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
-      .stat-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.08);
-      }
+      .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.08); }
 
       .stat-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        margin-bottom: 0; /* Alt boşluğu iptal ettik */
-        flex-shrink: 0;
-        color: var(--primary);
-        background: #f0f9ff;
-        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        width: 44px; height: 44px; flex-shrink: 0; color: var(--primary);
+        background: #f0f9ff; border-radius: 12px;
       }
 
-      .stat-icon svg {
-        width: 20px;
-        height: 20px;
-        stroke-width: 2.5;
-      }
+      .stat-icon svg { width: 20px; height: 20px; stroke-width: 2.5; }
 
-      .stat-details {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-      }
-
-      .stat-details span {
-        display: block;
-        color: var(--muted);
-        font-size: 0.8rem;
-        font-weight: 600;
-        margin-bottom: 0; /* Alt boşluğu iptal ettik */
-      }
-
-      .stat-details strong {
-        display: block;
-        color: #0f172a;
-        font-size: 1.3rem; /* Sayı boyutunu çok daha minimal yaptık */
-        line-height: 1;
-        letter-spacing: -0.02em;
-      }
+      .stat-details { display: flex; flex-direction: column; gap: 2px; }
+      .stat-details span { color: var(--muted); font-size: 0.8rem; font-weight: 600; }
+      .stat-details strong { color: #0f172a; font-size: 1.3rem; line-height: 1; letter-spacing: -0.02em; }
 
       .button {
-        display: inline-flex;
-        min-height: 48px;
-        align-items: center;
-        justify-content: center;
-        padding: 0 18px;
-        border: 1px solid transparent;
-        border-radius: 8px;
-        font-weight: 800;
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        gap: 8px;
+        display: inline-flex; min-height: 48px; align-items: center; justify-content: center;
+        padding: 0 18px; border: 1px solid transparent; border-radius: 8px; font-weight: 800;
+        cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; gap: 8px;
       }
 
-      .button:hover {
-        transform: translateY(-2px);
-      }
-
-      .primary {
-        color: #fff;
-        background: var(--primary);
-        box-shadow: 0 14px 30px rgba(0, 181, 226, 0.24);
-      }
-
-      .ghost {
-        background: var(--surface);
-        border-color: var(--line);
-      }
+      .button:hover { transform: translateY(-2px); }
+      .primary { color: #fff; background: var(--primary); box-shadow: 0 14px 30px rgba(0, 181, 226, 0.24); }
 
       .section-strip {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        margin: 0 clamp(18px, 5vw, 72px) 24px;
-        overflow: hidden;
-        background: var(--line);
-        border: 1px solid var(--line);
-        border-radius: 20px; /* Tasarımı yumuşatmak için radius artırıldı */
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+        margin: 0 clamp(18px, 5vw, 72px) 24px; overflow: hidden;
+        background: var(--line); border: 1px solid var(--line); border-radius: 20px;
       }
 
-      .section-strip article {
-        min-height: 126px;
-        padding: 32px 24px;
-        background: var(--surface);
-      }
+      .section-strip article { min-height: 126px; padding: 32px 24px; background: var(--surface); }
+      .section-strip strong { display: block; margin-bottom: 12px; font-size: 1.1rem; color: #0f172a; }
+      .section-strip span { color: var(--muted); line-height: 1.6; }
 
-      .section-strip strong {
-        display: block;
-        margin-bottom: 12px;
-        font-size: 1.1rem;
-        color: #0f172a;
-      }
+      .recent-schools-section { padding: 24px clamp(18px, 5vw, 72px) 40px; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-bottom: 1px solid var(--line); }
+      .schools-section { padding: 48px clamp(18px, 5vw, 72px) 48px; }
+      .register-section { padding: 48px clamp(18px, 5vw, 72px) 80px; background: #f8fafc; }
 
-      .section-strip span,
-      .section-heading p,
-      .payment-note p {
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      /* YENİ: Alt boşluk (padding-bottom) daraltıldı */
-      .recent-schools-section {
-        padding: 24px clamp(18px, 5vw, 72px) 40px; 
-        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-        border-bottom: 1px solid var(--line);
-      }
-
-      /* YENİ: Üst ve alt boşluklar daha makul seviyeye çekildi */
-      .schools-section {
-        padding: 48px clamp(18px, 5vw, 72px) 48px;
-      }
-
-      .register-section {
-        padding: 48px clamp(18px, 5vw, 72px) 80px;
-        background: #f8fafc;
-      }
-
-      .section-heading {
-        max-width: 760px;
-        margin-bottom: 32px;
-      }
-
-      .eyebrow {
-        margin: 0 0 14px;
-        color: var(--primary);
-        font-size: 0.78rem;
-        font-weight: 800;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-      }
-
-      .section-heading h2 {
-        margin-bottom: 16px;
-        font-size: clamp(2rem, 4vw, 3rem);
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        color: #0f172a;
-      }
+      .section-heading { max-width: 760px; margin-bottom: 32px; }
+      .section-heading p { color: var(--muted); line-height: 1.6; }
+      .section-heading h2 { margin-bottom: 16px; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; color: #0f172a; }
 
       .school-grid {
         display: grid;
@@ -475,89 +352,69 @@
         gap: 20px;
       }
 
+      /* YENİ EKLENEN DARK KART STİLLERİ (WATERMARK EFEKTLİ) */
       .school-card {
         position: relative;
         display: flex;
         flex-direction: column;
-        padding: 16px;
-        background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(226, 232, 240, 0.8);
+        padding: 24px;
+        background: var(--card-bg, #0b1b3d);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
         border: none;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         overflow: hidden;
         z-index: 1;
+        color: #ffffff;
+      }
+
+      .school-card::after {
+        content: '';
+        position: absolute;
+        right: -10%;
+        bottom: -10%;
+        width: 250px;
+        height: 250px;
+        border: 2px solid rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        z-index: -1;
+        box-shadow: inset 0 0 0 30px rgba(255, 255, 255, 0.02);
+      }
+
+      .school-card::before {
+        content: '';
+        position: absolute;
+        right: 15%;
+        bottom: 15%;
+        width: 350px;
+        height: 350px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        border-radius: 50%;
+        z-index: -1;
       }
 
       .school-card:hover {
         transform: translateY(-6px);
-        box-shadow: 0 20px 40px -8px rgba(0, 181, 226, 0.12), 0 0 0 1px rgba(0, 181, 226, 0.2);
-      }
-
-      /* YENİ EKLENEN: Sayfalama (Pagination) Stilleri */
-      .pagination-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        margin-top: 40px;
-        width: 100%;
-      }
-
-      .page-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 44px;
-        height: 44px;
-        padding: 0 12px;
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        color: var(--muted);
-        font-size: 0.95rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .page-btn svg {
-        display: block;
-      }
-
-      .page-btn:hover:not(:disabled) {
-        border-color: var(--primary);
-        color: var(--primary);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 181, 226, 0.1);
-      }
-
-      .page-btn.active {
-        background: var(--primary);
-        color: #ffffff;
-        border-color: var(--primary);
-        box-shadow: 0 4px 12px rgba(0, 181, 226, 0.25);
-      }
-
-      .page-btn:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
       }
 
       .card-header {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
-        margin-bottom: 12px;
+        margin-bottom: 20px;
       }
 
       .sport-tag {
         display: flex;
         align-items: center;
         gap: 8px;
-        /* YENİ: Renkler JS'den dinamik geleceği için buradaki sabit renk kaldırıldı */
+        background: var(--card-accent, #e2ff2b);
+        color: var(--card-bg, #0b1b3d);
+        padding: 6px 14px;
+        border-radius: 12px;
         font-weight: 800;
-        font-size: 0.85rem;
+        font-size: 0.95rem;
         letter-spacing: -0.01em;
       }
 
@@ -565,33 +422,30 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
-        /* YENİ: Arka plan rengi JS'den geleceği için buradaki sabit renk kaldırıldı */
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Gölge daha nötr hale getirildi */
       }
 
       .sport-icon-box svg {
-        width: 16px;
-        height: 16px;
-        stroke: currentColor;
+        width: 20px;
+        height: 20px;
+        stroke: var(--card-bg, #0b1b3d);
         stroke-width: 2.5;
       }
 
       .school-logo {
-        max-height: 32px;
-        max-width: 70px;
+        width: 44px;
+        height: 44px;
         object-fit: contain;
-        border-radius: 6px;
-        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.05));
+        border-radius: 50%;
+        background: #ffffff;
+        padding: 4px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       }
 
       .school-card h3 {
         margin-top: 0;
-        margin-bottom: 12px;
-        font-size: 1.05rem;
-        color: #0f172a;
+        margin-bottom: 20px;
+        font-size: 1.35rem;
+        color: #ffffff;
         line-height: 1.3;
         letter-spacing: -0.02em;
         font-weight: 800;
@@ -601,450 +455,192 @@
         overflow: hidden;
       }
 
-      /* YENİ: Bilgiler yan yana dizilecek şekilde güncellendi */
       .card-inline-details {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 6px;
-        margin-bottom: 20px;
+        gap: 8px;
+        margin-bottom: 24px;
         flex-grow: 1;
         align-content: flex-start;
-        color: #475569;
-        font-size: 0.85rem;
+        color: #e2e8f0;
+        font-size: 0.9rem;
         font-weight: 500;
       }
 
       .detail-item {
         display: inline-flex;
         align-items: center;
-        gap: 4px;
+        gap: 6px;
       }
 
       .detail-item svg {
-        width: 16px;
-        height: 16px;
-        stroke: #94a3b8;
+        width: 18px;
+        height: 18px;
+        stroke: var(--card-accent, #e2ff2b);
         fill: none;
-        stroke-width: 2;
+        stroke-width: 2.5;
         flex-shrink: 0;
       }
 
       .detail-separator {
-        color: #cbd5e1;
-        font-weight: 700;
-        font-size: 1rem;
+        color: rgba(255,255,255,0.4);
+        font-weight: 800;
+        font-size: 1.2rem;
         line-height: 1;
-        margin: 0 2px;
+        margin: 0 4px;
       }
 
-      /* YENİ: Alt bölümde tam genişlikte yatay buton tasarımı */
       .whatsapp-button {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         width: 100%;
-        min-height: 48px;
-        padding: 0 16px;
-        background: transparent;
-        border: 1px solid var(--line);
-        border-radius: 12px;
+        min-height: 52px;
+        padding: 0 20px;
+        background: var(--card-accent, #e2ff2b);
+        border: none;
+        border-radius: 14px;
         text-decoration: none;
         transition: all 0.3s ease;
-        gap: 8px;
       }
       
       .whatsapp-button span {
-        font-size: 0.85rem;
-        font-weight: 700;
+        font-size: 0.95rem;
+        font-weight: 800;
         line-height: 1;
-        color: var(--muted);
-        transition: color 0.3s ease;
+        color: var(--card-bg, #0b1b3d);
       }
 
       .whatsapp-button svg {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
         fill: none;
-        stroke: var(--primary);
-        stroke-width: 2;
+        stroke: var(--card-bg, #0b1b3d);
+        stroke-width: 2.5;
         stroke-linecap: round;
         stroke-linejoin: round;
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease;
       }
 
       .whatsapp-button:hover {
-        background: #f8fafc;
-        border-color: var(--primary);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 181, 226, 0.08);
-      }
-
-      .whatsapp-button:hover span {
-        color: var(--primary-dark);
+        box-shadow: 0 8px 20px -6px var(--card-accent);
+        filter: brightness(1.05);
       }
 
       .whatsapp-button:hover svg {
         transform: translateX(4px);
-        stroke: var(--primary-dark);
       }
+      /* KART STİLLERİ BİTİŞ */
+
+      .pagination-container {
+        display: flex; justify-content: center; align-items: center;
+        gap: 8px; margin-top: 40px; width: 100%;
+      }
+
+      .page-btn {
+        display: flex; align-items: center; justify-content: center;
+        min-width: 44px; height: 44px; padding: 0 12px; background: var(--surface);
+        border: 1px solid var(--line); border-radius: 12px; color: var(--muted);
+        font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease;
+      }
+
+      .page-btn:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 181, 226, 0.1); }
+      .page-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); box-shadow: 0 4px 12px rgba(0, 181, 226, 0.25); }
+      .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
       .empty-state {
-        grid-column: 1 / -1;
-        padding: 22px;
-        color: var(--muted);
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        text-align: center;
-        font-weight: 600;
+        grid-column: 1 / -1; padding: 22px; color: var(--muted); background: var(--surface);
+        border: 1px solid var(--line); border-radius: 8px; text-align: center; font-weight: 600;
       }
 
-      /* KAHVE BANNER & FORM STİLLERİ AYNEN KORUNDU */
+      /* KAHVE BANNER & FORM STİLLERİ */
       .coffee-banner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-        padding: 32px;
-        background: #ffffff;
-        border: 1px solid rgba(245, 158, 11, 0.2);
-        border-radius: 24px;
-        margin-top: 28px;
-        box-shadow: 0 12px 32px -8px rgba(245, 158, 11, 0.12);
-        position: relative;
-        overflow: hidden;
+        display: flex; align-items: center; justify-content: space-between; gap: 24px;
+        padding: 32px; background: #ffffff; border: 1px solid rgba(245, 158, 11, 0.2);
+        border-radius: 24px; margin-top: 28px; box-shadow: 0 12px 32px -8px rgba(245, 158, 11, 0.12);
+        position: relative; overflow: hidden;
       }
-
       .coffee-banner::before {
-        content: '';
-        position: absolute;
-        top: -50%; left: -5%;
-        width: 250px; height: 250px;
-        background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, rgba(255,255,255,0) 70%);
-        z-index: 0;
+        content: ''; position: absolute; top: -50%; left: -5%; width: 250px; height: 250px;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, rgba(255,255,255,0) 70%); z-index: 0;
       }
-
-      .coffee-content-wrapper {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-      }
-
+      .coffee-content-wrapper { position: relative; z-index: 1; display: flex; align-items: center; gap: 20px; }
       .creator-avatar {
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        box-shadow: 0 8px 16px -4px rgba(245, 158, 11, 0.4);
-        flex-shrink: 0;
+        width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        display: flex; align-items: center; justify-content: center; color: white;
+        box-shadow: 0 8px 16px -4px rgba(245, 158, 11, 0.4); flex-shrink: 0;
       }
-
-      .coffee-banner-text {
-        flex: 1;
-      }
-
-      .coffee-banner-text h3 {
-        color: #0f172a;
-        margin-bottom: 6px;
-        font-size: 1.35rem;
-        letter-spacing: -0.02em;
-        font-weight: 800;
-      }
-
-      .coffee-banner-text p {
-        color: #475569;
-        margin: 0;
-        line-height: 1.55;
-        font-size: 0.95rem;
-      }
-
-      .coffee-banner-text p strong {
-        color: #0f172a;
-        font-weight: 800;
-      }
-
+      .coffee-banner-text { flex: 1; }
+      .coffee-banner-text h3 { color: #0f172a; margin-bottom: 6px; font-size: 1.35rem; letter-spacing: -0.02em; font-weight: 800; }
+      .coffee-banner-text p { color: #475569; margin: 0; line-height: 1.55; font-size: 0.95rem; }
+      .coffee-banner-text p strong { color: #0f172a; font-weight: 800; }
       .coffee-banner-btn {
-        position: relative;
-        z-index: 1;
-        background: #f59e0b;
-        color: #ffffff;
-        white-space: nowrap;
-        border: none;
-        padding: 0 28px;
-        min-height: 52px;
-        border-radius: 14px;
-        font-size: 1rem;
-        font-weight: 800;
-        box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.5);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
+        position: relative; z-index: 1; background: #f59e0b; color: #ffffff; white-space: nowrap; border: none;
+        padding: 0 28px; min-height: 52px; border-radius: 14px; font-size: 1rem; font-weight: 800;
+        box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.5); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none; display: inline-flex; align-items: center;
       }
-
-      .coffee-banner-btn:hover {
-        background: #d97706;
-        box-shadow: 0 12px 24px -6px rgba(245, 158, 11, 0.6);
-        transform: translateY(-2px);
-      }
+      .coffee-banner-btn:hover { background: #d97706; box-shadow: 0 12px 24px -6px rgba(245, 158, 11, 0.6); transform: translateY(-2px); }
 
       .registration-form-wrapper {
-        margin-top: 48px;
-        background: #ffffff;
-        border-radius: 24px;
-        padding: 40px;
+        margin-top: 48px; background: #ffffff; border-radius: 24px; padding: 40px;
         box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(226, 232, 240, 0.8);
       }
 
-      .form-header {
-        margin-bottom: 32px;
-        text-align: center;
-      }
+      .form-header { margin-bottom: 32px; text-align: center; }
+      .form-header h3 { font-size: 1.8rem; margin-bottom: 8px; color: #0f172a; }
+      .form-header p { color: var(--muted); }
 
-      .form-header h3 {
-        font-size: 1.8rem;
-        margin-bottom: 8px;
-        color: #0f172a;
+      .reg-form { display: grid; gap: 20px; }
+      .form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .form-group { display: flex; flex-direction: column; gap: 8px; }
+      .form-group label { color: #0f172a; font-size: 0.9rem; }
+      .form-group input, .form-group select {
+        width: 100%; min-height: 48px; padding: 0 16px; background: #f8fafc;
+        border: 1px solid #e2e8f0; border-radius: 12px; color: #0f172a; font-size: 0.95rem; transition: all 0.2s ease;
       }
-
-      .form-header p {
-        color: var(--muted);
-      }
-
-      .reg-form {
-        display: grid;
-        gap: 20px;
-      }
-
-      .form-row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .form-group label {
-        color: #0f172a;
-        font-size: 0.9rem;
-      }
-
-      .form-group input[type="text"],
-      .form-group input[type="tel"],
-      .form-group input[type="url"],
-      .form-group select {
-        width: 100%;
-        min-height: 48px;
-        padding: 0 16px;
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        color: #0f172a;
-        font-size: 0.95rem;
-        transition: all 0.2s ease;
-      }
-
-      .form-group input:focus,
-      .form-group select:focus {
-        outline: none;
-        background: #ffffff;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(0, 181, 226, 0.15);
-      }
-
-      .checkbox-group {
-        display: flex;
-        gap: 24px;
-        padding: 12px 16px;
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-      }
-
-      .checkbox-label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        color: #475569;
-        font-size: 0.95rem;
-      }
-
-      .checkbox-label input {
-        width: 18px;
-        height: 18px;
-        accent-color: var(--primary);
-      }
-
-      .form-submit-btn {
-        margin-top: 12px;
-        min-height: 56px;
-        font-size: 1.1rem;
-        width: 100%;
-      }
-
-      .form-message {
-        display: none;
-        padding: 16px;
-        border-radius: 12px;
-        text-align: center;
-        font-weight: 700;
-        margin-top: 20px;
-      }
-
-      .form-message.success {
-        display: block;
-        background: #ecfdf5;
-        color: #059669;
-        border: 1px solid #a7f3d0;
-      }
-
-      .form-message.error {
-        display: block;
-        background: #fef2f2;
-        color: #dc2626;
-        border: 1px solid #fecaca;
-      }
+      .form-group input:focus, .form-group select:focus { outline: none; background: #ffffff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 181, 226, 0.15); }
+      
+      .checkbox-group { display: flex; gap: 24px; padding: 12px 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; }
+      .checkbox-label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600; color: #475569; font-size: 0.95rem; }
+      .checkbox-label input { width: 18px; height: 18px; accent-color: var(--primary); }
+      
+      .form-submit-btn { margin-top: 12px; min-height: 56px; font-size: 1.1rem; width: 100%; }
+      .form-message { display: none; padding: 16px; border-radius: 12px; text-align: center; font-weight: 700; margin-top: 20px; }
+      .form-message.success { display: block; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+      .form-message.error { display: block; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
 
       .site-footer {
-        justify-content: space-between;
-        gap: 16px;
-        padding: 28px clamp(18px, 5vw, 72px);
-        color: var(--muted);
-        border-top: 1px solid var(--line);
+        display: flex; justify-content: space-between; align-items: center; gap: 16px;
+        padding: 28px clamp(18px, 5vw, 72px); color: var(--muted); border-top: 1px solid var(--line);
       }
+      .site-footer a { color: var(--primary-dark); font-weight: 800; }
 
-      .site-footer a {
-        color: var(--primary-dark);
-        font-weight: 800;
-      }
-
-      /* MEDIA QUERIES (Mobil Uyumluluk) */
-      @media (max-width: 1200px) {
-        .school-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-      }
-
-      @media (max-width: 1120px) {
-        .filter-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-        .search-action-btn {
-          grid-column: 1 / -1;
-        }
-      }
-
-      @media (max-width: 960px) {
-        .school-grid,
-        .stats-horizontal-row {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-
+      /* MEDIA QUERIES */
+      @media (max-width: 1200px) { .school-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+      @media (max-width: 1120px) { .filter-grid { grid-template-columns: repeat(2, 1fr); } .search-action-btn { grid-column: 1 / -1; } }
+      @media (max-width: 960px) { .school-grid, .stats-horizontal-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
       @media (max-width: 720px) {
-        /* YENİ: Mobilde lacivert blok kaldırıldı, resmin üzerine şeffaf binen app-header yapıldı */
-        .site-header {
-          position: absolute;
-          align-items: center;
-          flex-direction: row;
-          background: transparent;
-          padding: 16px 20px;
-          border-bottom: none;
-        }
-
-        /* YENİ: Mobilde alan kazanmak için gereksiz linkler gizlendi */
-        .nav-links {
-          display: none;
-        }
-
-        /* YENİ: Mobil butonu biraz daha zarif hale getirildi */
-        .header-actions .button {
-          padding: 8px 16px;
-          font-size: 0.8rem;
-          min-height: 36px;
-        }
-
-        .hero-bg-section {
-          padding-top: 120px; /* Header şeffaf olduğu için yazılar ezilmesin diye boşluk eklendi */
-          padding-bottom: 100px;
-        }
-
-        .hero-bg-section h1 {
-          font-size: clamp(2.4rem, 10vw, 3.5rem);
-        }
-
-        .hero-filter-wrapper {
-          margin-top: -60px;
-          padding: 24px;
-          border-radius: 20px;
-          width: calc(100% - 36px);
-        }
-
-        .filter-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .section-strip,
-        .school-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .stats-horizontal-row {
-          grid-template-columns: repeat(2, 1fr); /* Mobilde alt alta inmek yerine 2'li yan yana minik kartlar */
-          gap: 12px;
-        }
-
-        .stat-card {
-          padding: 12px;
-          gap: 10px;
-        }
-
-        .stat-icon {
-          width: 36px;
-          height: 36px;
-        }
-
-        .stat-icon svg {
-          width: 18px;
-          height: 18px;
-        }
-
-        .stat-details strong {
-          font-size: 1.15rem;
-        }
-
-        .coffee-banner {
-          flex-direction: column;
-          text-align: center;
-          padding: 28px 20px;
-        }
-
-        .coffee-content-wrapper {
-          flex-direction: column;
-        }
-        
-        .coffee-banner-btn {
-          width: 100%;
-          justify-content: center;
-        }
-
-        .form-row {
-          grid-template-columns: 1fr;
-        }
+        .site-header { position: absolute; align-items: center; flex-direction: row; background: transparent; padding: 16px 20px; border-bottom: none; }
+        .nav-links { display: none; }
+        .header-actions .button { padding: 8px 16px; font-size: 0.8rem; min-height: 36px; }
+        .hero-bg-section { padding-top: 120px; padding-bottom: 100px; }
+        .hero-bg-section h1 { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+        .hero-filter-wrapper { margin-top: -60px; padding: 24px; border-radius: 20px; width: calc(100% - 36px); }
+        .filter-grid { grid-template-columns: 1fr; }
+        .section-strip, .school-grid { grid-template-columns: 1fr; }
+        .stats-horizontal-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .stat-card { padding: 12px; gap: 10px; }
+        .stat-icon { width: 36px; height: 36px; }
+        .stat-icon svg { width: 18px; height: 18px; }
+        .stat-details strong { font-size: 1.15rem; }
+        .coffee-banner { flex-direction: column; text-align: center; padding: 28px 20px; }
+        .coffee-content-wrapper { flex-direction: column; }
+        .coffee-banner-btn { width: 100%; justify-content: center; }
+        .form-row { grid-template-columns: 1fr; }
       }
     </style>
   </head>
@@ -1067,24 +663,20 @@
       </header>
 
       <main id="top">
-        
-        <!-- YENİ MODERN HERO ALANI -->
+        <!-- MODERN HERO ALANI -->
         <section class="hero-bg-section">
           <div class="hero-content-wrapper">
              <div class="hero-tags">
-               <span class="hero-tag">Basketbol</span>
-               <span class="hero-tag">Voleybol</span>
-               <span class="hero-tag">Yüzme</span>
+               <span class="hero-tag">Yeni Sezon</span>
              </div>
-             <h1>Geleceği İnşa Et,<br>Doğru Spor Okuluyla.</h1>
-             <p>Türkiye'nin en kapsamlı altyapı ve spor okulu platformu. Çocuğunuz için en uygun branşı, lokasyonu seçin ve ücretsiz deneme dersinizi anında alın.</p>
+             <h1>Geleceğin Yıldızlarını<br>Keşfedin.</h1>
+             <p>Çocuğunuzun spor yeteneklerini geliştirmesi için en yakın spor okulunu bulun, ücretsiz deneme dersine hemen başvurun.</p>
           </div>
         </section>
 
-        <!-- YENİ YÜZEYE ÇIKAN FİLTRELEME KARTI -->
+        <!-- FİLTRELEME KARTI -->
         <div class="hero-filter-wrapper">
            <h3>En uygun okulu bulun</h3>
-           
            <div class="filter-grid" aria-label="Okul filtreleri">
               <div class="filter-col">
                 <label>Branş</label>
@@ -1114,7 +706,6 @@
                 Okulları Bul
               </button>
            </div>
-
            <div class="quick-filters">
               <span class="quick-label">Popüler Aramalar:</span>
               <span class="quick-tag" onclick="document.getElementById('sport-filter').value='Basketbol'; document.getElementById('sport-filter').dispatchEvent(new Event('change')); document.getElementById('okullar').scrollIntoView({behavior: 'smooth'})">Basketbol</span>
@@ -1123,59 +714,30 @@
            </div>
         </div>
 
-        <!-- İSTATİSTİKLER (Eski Score Panel Yeni Tasarımda Yatay Olarak Eklendi) -->
+        <!-- İSTATİSTİKLER -->
         <div class="stats-horizontal-row">
           <div class="stat-card">
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            </div>
-            <div class="stat-details">
-              <span>Aktif Okul</span>
-              <strong id="school-count">0</strong>
-            </div>
+            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div class="stat-details"><span>Aktif Okul</span><strong id="school-count">0</strong></div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-            </div>
-            <div class="stat-details">
-              <span>Branş Çeşitliliği</span>
-              <strong id="sport-count">0</strong>
-            </div>
+            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+            <div class="stat-details"><span>Branş Çeşitliliği</span><strong id="sport-count">0</strong></div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div class="stat-details">
-              <span>Farklı İlçe</span>
-              <strong id="district-count">0</strong>
-            </div>
+            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div class="stat-details"><span>Farklı İlçe</span><strong id="district-count">0</strong></div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            </div>
-            <div class="stat-details">
-              <span>Yönlendirilen Veli</span>
-              <strong id="whatsapp-count">0 tik</strong>
-            </div>
+            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="stat-details"><span>Yönlendirilen Veli</span><strong id="whatsapp-count">0 tik</strong></div>
           </div>
         </div>
 
         <section class="section-strip" aria-label="Platform özellikleri">
-          <article>
-            <strong>Branşa göre arama</strong>
-            <span>Futbol, basketbol, voleybol, yüzme ve cimnastik okullarını filtreleyin.</span>
-          </article>
-          <article>
-            <strong>İlçeye göre seçim</strong>
-            <span>Size yakın spor okulunu hızlı şekilde bulun.</span>
-          </article>
-          <article>
-            <strong>WhatsApp ile iletişim</strong>
-            <span>Deneme dersi talebinizi seçilen okulun kendi hattına gönderin.</span>
-          </article>
+          <article><strong>Branşa göre arama</strong><span>Futbol, basketbol, voleybol, yüzme ve cimnastik okullarını filtreleyin.</span></article>
+          <article><strong>İlçeye göre seçim</strong><span>Size yakın spor okulunu hızlı şekilde bulun.</span></article>
+          <article><strong>WhatsApp ile iletişim</strong><span>Deneme dersi talebinizi seçilen okulun kendi hattına gönderin.</span></article>
         </section>
 
         <!-- YENİ EKLENEN OKULLAR -->
@@ -1184,57 +746,35 @@
             <h2>Aramıza Yeni Katılan Okullar</h2>
             <p>Platformumuza en son eklenen 4 spor okulunu hemen inceleyin.</p>
           </div>
-          <div class="school-grid" id="recent-school-list" aria-live="polite">
-            <!-- JavaScript ile son 4 okul buraya eklenecek -->
-          </div>
+          <div class="school-grid" id="recent-school-list" aria-live="polite"></div>
         </section>
 
         <!-- TÜM OKULLAR -->
         <section class="schools-section" id="okullar">
           <div class="section-heading">
-            <!-- "Spor okulları" eyebrow yazısı buradan silindi -->
             <h2>Tüm Okulları İnceleyin</h2>
-            <p>
-              Listenizi inceleyin, beğendiğiniz okulun WhatsApp hattından anında deneme dersi randevunuzu alın.
-            </p>
+            <p>Listenizi inceleyin, beğendiğiniz okulun WhatsApp hattından anında deneme dersi randevunuzu alın.</p>
           </div>
-
           <div class="school-grid" id="school-list" aria-live="polite"></div>
-          
-          <!-- YENİ EKLENEN: Sayfalama Butonlarının Geleceği Alan -->
           <div class="pagination-container" id="pagination-controls"></div>
         </section>
 
         <!-- KAYIT ALANI -->
         <section class="register-section" id="kayit">
           <div class="section-heading">
-            <!-- "Spor okulları için" eyebrow yazısı buradan silindi -->
             <h2>Okulunuzu SporKayıt listesine ekleyin.</h2>
-            <p>
-              Okul kartınızda branşınız, ilçeniz, yaş aralığınız, tesis
-              bilginiz ve WhatsApp deneme dersi butonunuz yer alır.
-            </p>
+            <p>Okul kartınızda branşınız, ilçeniz, yaş aralığınız, tesis bilginiz ve WhatsApp deneme dersi butonunuz yer alır.</p>
           </div>
           
           <div class="coffee-banner">
             <div class="coffee-content-wrapper">
-              <div class="creator-avatar" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;">
-                  <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
-                  <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
-                  <line x1="6" x2="6" y1="2" y2="4"/>
-                  <line x1="10" x2="10" y1="2" y2="4"/>
-                  <line x1="14" x2="14" y1="2" y2="4"/>
-                </svg>
-              </div>
+              <div class="creator-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg></div>
               <div class="coffee-banner-text">
                 <h3>Platform Tamamen Ücretsiz! 🎉</h3>
                 <p>Merhaba, ben <strong>Kürşat Buğra Karaoğlan</strong>. Bu platformu tamamen ücretsiz geliştirdim. Kod yazarken ekran başında uyuyakalmamam için bana bir kahve ısmarlayarak destek olabilirsiniz. ☕</p>
               </div>
             </div>
-            <a class="button coffee-banner-btn" href="https://buymeacoffee.com/bedenegitimi" target="_blank" rel="noopener">
-              Kürşat'a Kahve Ismarla
-            </a>
+            <a class="button coffee-banner-btn" href="https://buymeacoffee.com/bedenegitimi" target="_blank" rel="noopener">Kürşat'a Kahve Ismarla</a>
           </div>
 
           <div class="registration-form-wrapper" id="okul-ekle-form">
@@ -1287,12 +827,8 @@
                 <div class="form-group">
                   <label>Antrenman Günleri *</label>
                   <div class="checkbox-group">
-                    <label class="checkbox-label">
-                      <input type="checkbox" id="f_haftaIci"> Hafta İçi
-                    </label>
-                    <label class="checkbox-label">
-                      <input type="checkbox" id="f_haftaSonu"> Hafta Sonu
-                    </label>
+                    <label class="checkbox-label"><input type="checkbox" id="f_haftaIci"> Hafta İçi</label>
+                    <label class="checkbox-label"><input type="checkbox" id="f_haftaSonu"> Hafta Sonu</label>
                   </div>
                 </div>
               </div>
@@ -1302,10 +838,7 @@
                 <input type="url" id="f_logo" placeholder="Google Drive görsel linki veya site adresi">
               </div>
 
-              <button type="submit" class="button primary form-submit-btn" id="submitBtn">
-                Kaydı Gönder ve Listeye Ekle
-              </button>
-
+              <button type="submit" class="button primary form-submit-btn" id="submitBtn">Kaydı Gönder ve Listeye Ekle</button>
               <div id="formStatus" class="form-message"></div>
             </form>
           </div>
@@ -1323,7 +856,6 @@
       const googleScriptURL = "https://script.google.com/macros/s/AKfycbytThQGVOohZZffQnOGTFbYAJrLNBUaHs8cTscwLJalmqTBMDQzwU6ErD7pvfcZHCM/exec"; 
 
       let schools = [];
-      // YENİ EKLENEN: Sayfalama (Pagination) için durum değişkenleri
       let filteredData = []; 
       let currentPage = 1;
       const itemsPerPage = 15;
@@ -1340,12 +872,10 @@
       const countDistrict = document.getElementById("district-count");
       const countWhatsapp = document.getElementById("whatsapp-count");
 
-      // Hap İkonları (Pills)
       const iconLoc = `<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`;
       const iconAge = `<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`;
       const iconCal = `<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`;
 
-      // Spor Branşı İkonları
       const svgBasketball = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2v20" /><path d="M6 6.5a9 9 0 0 1 0 11" /><path d="M18 6.5a9 9 0 0 0 0 11" /></svg>`;
       const svgSoccer = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16l-3.5-2.5v-3L12 8l3.5 2.5v3L12 16z"/><path d="M12 16v6"/><path d="M8.5 13.5l-6 2.5"/><path d="M15.5 13.5l6 2.5"/><path d="M8.5 10.5L3 7"/><path d="M15.5 10.5L21 7"/><path d="M12 8V2"/></svg>`;
       const svgVolleyball = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a14 14 0 0 1 0 20"/><path d="M12 2a14 14 0 0 0 0 20"/></svg>`;
@@ -1354,70 +884,42 @@
       const svgTennis = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4l-4 4"/><path d="M20 6l-4 4"/><path d="M15 9l-4 4"/><path d="M17 11l-4 4"/><path d="M12 12l-8 8a2.83 2.83 0 0 0 4 4l8-8"/><circle cx="17" cy="7" r="5"/><circle cx="6" cy="6" r="1.5"/></svg>`;
       const svgDefault = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7c0 6 6 8 6 8s6-2 6-8V2z"/></svg>`;
 
-      function getUniqueValues(data, key) {
-        return [...new Set(data.map(item => item[key]).filter(val => val))].sort();
-      }
+      function getUniqueValues(data, key) { return [...new Set(data.map(item => item[key]).filter(val => val))].sort(); }
 
       function populateFilters() {
         sportFilter.innerHTML = '<option value="">Tüm branşlar</option>';
         ageFilter.innerHTML = '<option value="">Tüm yaşlar</option>';
-
-        const sports = getUniqueValues(schools, 'sport');
-        const ages = getUniqueValues(schools, 'age');
-
-        sports.forEach(sport => {
-          sportFilter.add(new Option(sport, sport));
-        });
-
-        ages.forEach(age => {
-          ageFilter.add(new Option(age, age));
-        });
+        getUniqueValues(schools, 'sport').forEach(sport => sportFilter.add(new Option(sport, sport)));
+        getUniqueValues(schools, 'age').forEach(age => ageFilter.add(new Option(age, age)));
       }
 
       let nationalData = [];
-
       async function loadNationalData() {
         try {
           const response = await fetch("https://turkiyeapi.dev/api/v1/provinces");
           const result = await response.json();
           nationalData = result.data;
-          
-          nationalData.sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(province => {
-            cityFilter.add(new Option(province.name, province.name));
-          });
+          nationalData.sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(province => cityFilter.add(new Option(province.name, province.name)));
         } catch (error) {
-          console.error("Ulusal veri çekilemedi. Okulların kayıtlı olduğu iller listeleniyor.", error);
-          const cities = getUniqueValues(schools, 'city');
-          cities.forEach(city => {
-            cityFilter.add(new Option(city, city));
-          });
+          getUniqueValues(schools, 'city').forEach(city => cityFilter.add(new Option(city, city)));
         }
       }
 
       function handleCityChange() {
         const selectedCity = cityFilter.value;
         districtFilter.innerHTML = "";
-        
         if (!selectedCity) {
-          districtFilter.disabled = true;
-          districtFilter.add(new Option("Önce il seçin", ""));
+          districtFilter.disabled = true; districtFilter.add(new Option("Önce il seçin", ""));
         } else {
-          districtFilter.disabled = false;
-          districtFilter.add(new Option("Tüm ilçeler", ""));
-          
+          districtFilter.disabled = false; districtFilter.add(new Option("Tüm ilçeler", ""));
           const province = nationalData.find(p => p.name === selectedCity);
           if (province && province.districts) {
-             province.districts.sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(d => {
-               districtFilter.add(new Option(d.name, d.name));
-             });
+             province.districts.sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(d => districtFilter.add(new Option(d.name, d.name)));
           } else {
              const districts = [...new Set(schools.filter(s => s.city === selectedCity).map(s => s.district))].sort((a,b) => a.localeCompare(b, 'tr'));
-             districts.forEach(d => {
-               districtFilter.add(new Option(d, d));
-             });
+             districts.forEach(d => districtFilter.add(new Option(d, d)));
           }
         }
-        
         filterSchools();
       }
 
@@ -1427,32 +929,20 @@
         countDistrict.textContent = getUniqueValues(data, 'district').length;
       }
 
-      // YENİ EKLENEN: Sayfa değiştirme fonksiyonu
       function goToPage(page) {
         currentPage = page;
         const startIndex = (page - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        const paginatedData = filteredData.slice(startIndex, endIndex);
-        
-        // Sadece bulunduğumuz sayfanın datasını ekrana çizdiriyoruz
-        renderSchools(paginatedData, schoolList);
+        renderSchools(filteredData.slice(startIndex, endIndex), schoolList);
         renderPagination();
-        
-        // Sayfa değiştiğinde listeye odaklanması için yukarı kaydır
-        document.getElementById('okullar').scrollIntoView({ behavior: 'smooth' });
       }
 
-      // YENİ EKLENEN: Sayfa numaralarını ve butonları oluşturan fonksiyon
       function renderPagination() {
         const container = document.getElementById('pagination-controls');
         container.innerHTML = '';
-        
         const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-        
-        // Eğer 1 sayfa veya 0 veri varsa sayfalama tuşlarını gösterme
         if (totalPages <= 1) return;
 
-        // Geri Butonu
         const prevBtn = document.createElement('button');
         prevBtn.className = 'page-btn';
         prevBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M15 18l-6-6 6-6"/></svg>';
@@ -1460,7 +950,6 @@
         prevBtn.onclick = () => goToPage(currentPage - 1);
         container.appendChild(prevBtn);
 
-        // Numaralı Butonlar (1, 2, 3...)
         for (let i = 1; i <= totalPages; i++) {
           const btn = document.createElement('button');
           btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
@@ -1469,7 +958,6 @@
           container.appendChild(btn);
         }
 
-        // İleri Butonu
         const nextBtn = document.createElement('button');
         nextBtn.className = 'page-btn';
         nextBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M9 18l6-6-6-6"/></svg>';
@@ -1494,50 +982,36 @@
           const message = encodeURIComponent(`Merhaba, SporKayıt platformundan ulaşıyorum. ${school.name} için ücretsiz deneme dersi almak istiyorum. Bilgi alabilir miyim?`);
           const whatsappUrl = `https://wa.me/${cleanPhone}?text=${message}`;
 
-          /* YENİ: Dinamik renk sistemi ve temalar */
+          /* DARK TEMA RENKLERİ VE TAKIM LOGİĞİ */
           let sportIcon = svgDefault;
-          let themeColor = "#4f46e5"; // İndigo/Lacivert (Sisteme yeni eklenecek bilinmeyen branşlar için Joker renk)
-          let themeBg = "#e0e7ff";
+          let defaultBg = "#1e293b"; 
+          let defaultAccent = "#38bdf8"; 
 
           const s = (school.sport || '').toLowerCase();
-          if (s.includes('basketbol')) {
-             sportIcon = svgBasketball;
-             themeColor = "#ea580c"; // Turuncu tema
-             themeBg = "#ffedd5";
-          } else if (s.includes('futbol')) {
-             sportIcon = svgSoccer;
-             themeColor = "#16a34a"; // Yeşil tema
-             themeBg = "#dcfce7";
-          } else if (s.includes('voleybol')) {
-             sportIcon = svgVolleyball;
-             themeColor = "#9333ea"; // Mor tema
-             themeBg = "#f3e8ff";
-          } else if (s.includes('yüzme') || s.includes('yuzme')) {
-             sportIcon = svgSwimming;
-             themeColor = "#0284c7"; // Mavi tema
-             themeBg = "#e0f2fe";
-          } else if (s.includes('cimnastik') || s.includes('jimnastik')) {
-             sportIcon = svgGymnastics;
-             themeColor = "#db2777"; // Pembe tema
-             themeBg = "#fce7f3";
-          } else if (s.includes('tenis')) {
-             sportIcon = svgTennis;
-             themeColor = "#0d9488"; // Turkuaz/Teal tema
-             themeBg = "#ccfbf1";
-          }
+          if (s.includes('basketbol')) { sportIcon = svgBasketball; defaultBg = "#0f172a"; defaultAccent = "#eab308"; }
+          else if (s.includes('futbol')) { sportIcon = svgSoccer; defaultBg = "#064e3b"; defaultAccent = "#a3e635"; }
+          else if (s.includes('voleybol')) { sportIcon = svgVolleyball; defaultBg = "#2e1065"; defaultAccent = "#f0abfc"; }
+          else if (s.includes('yüzme') || s.includes('yuzme')) { sportIcon = svgSwimming; defaultBg = "#082f49"; defaultAccent = "#38bdf8"; }
+          else if (s.includes('cimnastik') || s.includes('jimnastik')) { sportIcon = svgGymnastics; defaultBg = "#831843"; defaultAccent = "#f9a8d4"; }
+          else if (s.includes('tenis')) { sportIcon = svgTennis; defaultBg = "#0f766e"; defaultAccent = "#5eead4"; }
+
+          let themeBg = defaultBg;
+          let themeAccent = defaultAccent;
+
+          const n = (school.name || '').toLowerCase();
+          if (n.includes('fenerbahçe') || n.includes('fenerbahce')) { themeBg = "#0b1b3d"; themeAccent = "#d9f900"; }
+          else if (n.includes('galatasaray')) { themeBg = "#450a0a"; themeAccent = "#facc15"; }
+          else if (n.includes('beşiktaş') || n.includes('besiktas')) { themeBg = "#171717"; themeAccent = "#f8fafc"; }
+          else if (n.includes('trabzonspor')) { themeBg = "#4c0519"; themeAccent = "#38bdf8"; }
 
           let logoUrl = school.logo ? school.logo.trim() : '';
           if (logoUrl && logoUrl.includes('drive.google.com')) {
              let fileId = '';
              const matchD = logoUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
              const matchId = logoUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-             
              if (matchD && matchD[1]) fileId = matchD[1];
              else if (matchId && matchId[1]) fileId = matchId[1];
-
-             if (fileId) {
-                 logoUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
-             }
+             if (fileId) logoUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
           }
 
           let logoHtml = '';
@@ -1549,38 +1023,30 @@
           const isWeekday = school.weekday && school.weekday.trim().toLowerCase() === 'x';
           const isWeekend = school.weekend && school.weekend.trim().toLowerCase() === 'x';
           
-          /* YENİ: Etiketlerin HTML yapıları div/pill yerine span'a çevrildi */
-          if (isWeekday && isWeekend) {
-            scheduleHtml = `<span class="detail-item" title="Hafta İçi ve Sonu">${iconCal} <span>H.İçi/Sonu</span></span>`;
-          } else if (isWeekday) {
-            scheduleHtml = `<span class="detail-item" title="Hafta İçi">${iconCal} <span>Hafta İçi</span></span>`;
-          } else if (isWeekend) {
-            scheduleHtml = `<span class="detail-item" title="Hafta Sonu">${iconCal} <span>Hafta Sonu</span></span>`;
-          } else if (school.schedule) {
-            scheduleHtml = `<span class="detail-item" title="${school.schedule}">${iconCal} <span>${school.schedule}</span></span>`;
-          }
+          if (isWeekday && isWeekend) scheduleHtml = `<span class="detail-item" title="Hafta İçi ve Sonu">${iconCal} <span>H.İçi/Sonu</span></span>`;
+          else if (isWeekday) scheduleHtml = `<span class="detail-item" title="Hafta İçi">${iconCal} <span>Hafta İçi</span></span>`;
+          else if (isWeekend) scheduleHtml = `<span class="detail-item" title="Hafta Sonu">${iconCal} <span>Hafta Sonu</span></span>`;
+          else if (school.schedule) scheduleHtml = `<span class="detail-item" title="${school.schedule}">${iconCal} <span>${school.schedule}</span></span>`;
 
-          /* YENİ: Sadece İl bilgisi gösterilecek */
           const locationText = school.city ? school.city : '';
           const locHtml = locationText ? `<span class="detail-item" title="${locationText}">${iconLoc} <span>${locationText}</span></span>` : '';
 
           let ageHtml = '';
-          if (school.age) {
-             ageHtml = `<span class="detail-item" title="${school.age} Yaş">${iconAge} <span>${school.age} Yaş</span></span>`;
-          }
+          if (school.age) ageHtml = `<span class="detail-item" title="${school.age} Yaş">${iconAge} <span>${school.age} Yaş</span></span>`;
 
-          /* YENİ: Bilgiler yan yana dizildiği için aralarına '·' işareti eklendi */
           const detailsArray = [locHtml, ageHtml, scheduleHtml].filter(Boolean);
-          const detailsHtml = detailsArray.join('<span class="detail-separator">&middot;</span>');
+          const detailsHtml = detailsArray.join('<span class="detail-separator">&bull;</span>');
 
           const card = document.createElement("article");
           card.className = "school-card";
           
-          /* YENİ: HTML içeriğine style öznitelikleri (themeColor, themeBg) ile dinamik renkler eklendi */
+          card.style.setProperty('--card-bg', themeBg);
+          card.style.setProperty('--card-accent', themeAccent);
+          
           card.innerHTML = `
             <div class="card-header">
-              <div class="sport-tag" style="color: ${themeColor};">
-                <div class="sport-icon-box" style="background-color: ${themeBg}; color: ${themeColor};">
+              <div class="sport-tag">
+                <div class="sport-icon-box">
                   ${sportIcon}
                 </div>
                 <span class="sport-name">${school.sport}</span>
@@ -1615,7 +1081,6 @@
           return matchSport && matchCity && matchDistrict && matchAge;
         });
 
-        // GÜNCELLENEN: Filtrelenmiş datayı sayfalama sistemine aktarıp 1. sayfadan başlatıyoruz
         filteredData = filtered;
         goToPage(1); 
       }
@@ -1627,9 +1092,7 @@
 
           try {
             const response = await fetch(csvUrl);
-            if (!response.ok) {
-              throw new Error(`Ağ hatası: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`Ağ hatası: ${response.status}`);
             const csvText = await response.text();
 
             Papa.parse(csvText, {
@@ -1718,7 +1181,6 @@
            const data = await response.json();
            countWhatsapp.textContent = data.clicks + ' tik';
         } catch(e) {
-           console.log("Sunucudan sayaç çekilemedi, yerel veri gösteriliyor.");
            let local = parseInt(localStorage.getItem('waClicks')) || 0;
            countWhatsapp.textContent = local + ' tik';
         }
@@ -1731,10 +1193,7 @@
            current++;
            countWhatsapp.textContent = current + ' tik';
            localStorage.setItem('waClicks', current); 
-
-           if (googleScriptURL) {
-               fetch(googleScriptURL + "?action=click", { method: 'GET', mode: 'no-cors' }).catch(err => {});
-           }
+           if (googleScriptURL) fetch(googleScriptURL + "?action=click", { method: 'GET', mode: 'no-cors' }).catch(err => {});
         }
       });
 
@@ -1771,9 +1230,7 @@
           const response = await fetch(googleScriptURL, {
             method: 'POST',
             body: JSON.stringify(formData),
-            headers: {
-              'Content-Type': 'text/plain;charset=utf-8',
-            }
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' }
           });
 
           const result = await response.json();
@@ -1807,7 +1264,6 @@
           const recentSchools = [...schools].reverse().slice(0, 4);
           renderSchools(recentSchools, recentSchoolList);
           
-          // GÜNCELLENEN: Veriyi sayfalama sistemine aktar ve ilk sayfayı çiz
           filteredData = schools;
           goToPage(1);
           
